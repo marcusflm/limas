@@ -1,0 +1,17 @@
+{
+    "name": "limas",
+    "service": "limas",
+    "workspaceFolder": "/var/www/app",
+    "dockerComposeFile": "../.docker/docker-compose.yml",
+    "remoteUser": "appuser",
+    "customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh",			
+			},
+			"extensions": [
+				"bmewburn.vscode-intelephense-client"
+			]
+		}
+	}
+}

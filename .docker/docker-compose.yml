@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+    ######## APP ########
+    limas:
+        build:
+            context: ..
+            dockerfile: .docker/Dockerfile
+        command: "/usr/local/bin/start"
+        environment:
+            - CONTAINER_ROLE=APP
+        volumes:
+            - ../:/var/www/app:cached
+        ports:
+            - 8017:8080
+            - 8000:8000
+
+    ######## MYSQL ########
+    limas-mysql:
+        image: mysql/mysql-server:8.0.25
+        environment:
+            - MYSQL_DATABASE=limasdb
+            - MYSQL_USER=limas
+            - MYSQL_PASSWORD=password
+            - MYSQL_ROOT_PASSWORD=password
+        volumes:
+            - ~/.docker-storage/limas/mysql:/var/lib/mysql
+        ports:
+            - 3317:3306
+
+    ######## REDIS ########
+    limas-redis:
+        image: redis:6.2.4
+        volumes:
+            - ~/.docker-storage/limas/redis:/data
+        ports:
+            - 6317:6379
