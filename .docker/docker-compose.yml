@@ -17,7 +17,7 @@ services:
 
     ######## MYSQL ########
     limas-mysql:
-        image: mysql/mysql-server:8.0.25
+        image: mysql/mysql-server:8.0.32
         environment:
             - MYSQL_DATABASE=limasdb
             - MYSQL_USER=limas
@@ -30,7 +30,7 @@ services:
 
     ######## REDIS ########
     limas-redis:
-        image: redis:6.2.4
+        image: redis:7.0.12
         volumes:
             - ~/.docker-storage/limas/redis:/data
         ports:

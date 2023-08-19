@@ -7,10 +7,12 @@
     "customizations": {
 		"vscode": {
 			"settings": {
-				"terminal.integrated.defaultProfile.linux": "zsh",			
+				"terminal.integrated.defaultProfile.linux": "zsh"
 			},
 			"extensions": [
-				"bmewburn.vscode-intelephense-client"
+				"bmewburn.vscode-intelephense-client",
+				"PKief.material-icon-theme",
+				"bradlc.vscode-tailwindcss"
 			]
 		}
 	}
