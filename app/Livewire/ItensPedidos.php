@@ -11,10 +11,7 @@ class ItensPedidos extends Component
 {
     public Pedido $pedido;
 
-    public function mount(Pedido $pedido)
-    {
-        $this->pedido = $pedido;
-    }
+    public float $desconto;
 
     public function cadastrar(int $pedido_id)
     {

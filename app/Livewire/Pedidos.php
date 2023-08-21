@@ -3,20 +3,16 @@
 namespace App\Livewire;
 
 use App\Models\Pedido;
+use App\Traits\Navegavel;
 use Livewire\Component;
 
 class Pedidos extends Component
 {
+    use Navegavel;
+
     public function cadastrar()
     {
         return redirect()->to('pedidos/cadastrar');
-    }
-
-    public function navegar(int $pedido_id)
-    {
-        // $pedido = Pedido::where('id', $pedido_id)->get();
-        // dd($pedido[0]->toArray());
-        return redirect()->to("/itens-pedido/{$pedido_id}");
     }
 
     public function render()

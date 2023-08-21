@@ -5,33 +5,26 @@ namespace App\Livewire;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use App\Models\Produto;
+use App\Models\StatusPedido;
 use Livewire\Component;
 
 class CadastraPedido extends Component
 {
     public $cliente_id;
-    public $valor_itens;
-    public $valor_frete;
-    public $valor_desconto;
-    public $valor_total;
-    public $data_pedido;
 
     public function save()
     {
-        $cliente = Cliente::with('bairro')->where('id', $this->cliente_id)->get();
-        $valor_frete = $cliente[0]->bairro->frete;
+        $cliente = Cliente::with('bairro')->where('id', $this->cliente_id)->first();
+        $valor_frete = $cliente->bairro->frete;
 
-        Pedido::create([
+        $pedido = Pedido::create([
             'cliente_id' => $this->cliente_id,
-            'data_pedido' => date("Y-m-d"),
-            'valor_itens' => 0,
+            'data_pedido' => now(),
             'valor_frete' => $valor_frete,
-            'valor_desconto' => 0,
-            'valor_total' => $valor_frete,
-            'status_pedido_id' => 1,
-            'status_pagamento_id' => 1
+            'valor_total' => $valor_frete
         ]);
-        return redirect()->to('/pedidos');
+
+        return redirect()->to("/itens-pedido/{$pedido->id}");
     }
 
     public function render()
@@ -39,8 +32,7 @@ class CadastraPedido extends Component
         return view(
             'livewire.cadastra-pedido',
             [
-                'clientes' => Cliente::all(),
-                'produtos' => Produto::all()
+                'clientes' => Cliente::all()
             ]
         );
     }

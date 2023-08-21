@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class StatusPedido extends Model
 {
     use HasFactory;
+
+    public const ABERTO = 1;
+    public const FECHADO = 2;
 }

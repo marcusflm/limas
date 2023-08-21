@@ -9,23 +9,15 @@ use Livewire\Component;
 
 class CadastraItensPedido extends Component
 {
-    public $pedido_id;
-    public $produto_id;
-    public $valor_unitario;
-    public $quantidade;
-    public $valor_total;
     public Pedido $pedido;
 
-    public function mount(Pedido $pedido)
-    {
-        $this->pedido = $pedido;
-    }
+    public $produto_id;
+    public $quantidade;
 
     public function save()
     {
-        // dd($this->quantidade);
-        $produto = Produto::where('id', $this->produto_id)->get();
-        $valor_unitario = $produto[0]->valor;
+        $produto = Produto::where('id', $this->produto_id)->first();
+        $valor_unitario = $produto->valor;
         $valor_total = $valor_unitario * $this->quantidade;
 
         ItensPedido::create([

@@ -15,12 +15,12 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('cliente_id')->unsigned();
             $table->datetime('data_pedido');
-            $table->decimal('valor_itens', 10, 2);
+            $table->decimal('valor_itens', 10, 2)->default(0);
             $table->decimal('valor_frete', 10, 2);
-            $table->decimal('valor_desconto', 10, 2);
+            $table->decimal('valor_desconto', 10, 2)->default(0);
             $table->decimal('valor_total', 10, 2);
-            $table->integer('status_pedido_id')->unsigned();
-            $table->integer('status_pagamento_id')->unsigned();
+            $table->integer('status_pedido_id')->unsigned()->default(1);
+            $table->integer('status_pagamento_id')->unsigned()->default(1);
 
             $table->timestamps();
 
