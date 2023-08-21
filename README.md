@@ -6,9 +6,9 @@
 ```bash
 composer install
 
-yarn install
-
 php artisan key:generate
+
+yarn install
 
 yarn dev
 ```
