@@ -10,6 +10,8 @@ php artisan key:generate
 
 yarn install
 
+php artisan migrate:fresh --seed
+
 yarn dev
 ```
 
