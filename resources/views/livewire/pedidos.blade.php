@@ -5,9 +5,21 @@
         </x-slot:actions>
     </x-header>
 
-    @if($pedidos->count())
+    <x-table :headers="$headers" :rows="$pedidos">
+
+        @scope('cell_data_pedido', $pedido)
+        {{ $pedido->data_pedido->format('d/m/Y') }}
+        @endscope
+
+        @scope('cell_valor_total', $pedido)
+        {{ number_format($pedido->valor_total, 2, ',', '.') }}
+        @endscope
+
+    </x-table>
+
+    @if($pedidos->count() > 0)
     <x-card>
-        <x-table :headers="$headers" :rows="$pedidos" striped @row-click="$wire.navegar('/itens-pedido/' + $event.detail.id)" />
+
     </x-card>
     @else
     <x-alert icon="o-user" title="Sem pedidos" />

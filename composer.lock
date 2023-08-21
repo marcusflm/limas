@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6174e2da6543ca8a0bec2bc22f97c1c",
+    "content-hash": "e532ae21dadc1559d77eb31937ad799d",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -3315,16 +3315,16 @@
         },
         {
             "name": "robsontenorio/mary",
-            "version": "0.21.0",
+            "version": "0.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robsontenorio/mary.git",
-                "reference": "d39c4c444226be685abb1b7027b92fe2e7a5e114"
+                "reference": "0a9c4592723e0a6cb499beba37bc868bf7e0c7c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/d39c4c444226be685abb1b7027b92fe2e7a5e114",
-                "reference": "d39c4c444226be685abb1b7027b92fe2e7a5e114",
+                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/0a9c4592723e0a6cb499beba37bc868bf7e0c7c0",
+                "reference": "0a9c4592723e0a6cb499beba37bc868bf7e0c7c0",
                 "shasum": ""
             },
             "require": {
@@ -3363,7 +3363,7 @@
                 }
             ],
             "description": "Laravel blade components for Livewire 3",
-            "homepage": "https://github.com/robsontenorio/mary",
+            "homepage": "https://mary-ui.com",
             "keywords": [
                 "Mary",
                 "blade",
@@ -3374,9 +3374,9 @@
             ],
             "support": {
                 "issues": "https://github.com/robsontenorio/mary/issues",
-                "source": "https://github.com/robsontenorio/mary/tree/0.21.0"
+                "source": "https://github.com/robsontenorio/mary/tree/0.26.0"
             },
-            "time": "2023-08-18T13:13:40+00:00"
+            "time": "2023-08-20T19:01:02+00:00"
         },
         {
             "name": "symfony/console",

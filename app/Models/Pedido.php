@@ -13,6 +13,10 @@ class Pedido extends Model
 
     protected $fillable = ['cliente_id', 'valor_itens', 'valor_frete', 'valor_desconto', 'valor_total', 'data_pedido', 'status_pedido_id', 'status_pagamento_id'];
 
+    protected $casts = [
+        'data_pedido' => 'datetime:Y-m-d',
+    ];
+
     public function itensPedido(): HasMany
     {
         return $this->hasMany(ItensPedido::class);
