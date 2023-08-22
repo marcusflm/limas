@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ $title ?? 'Page Title' }}</title>
+    <title>LIMA's confeitaria caseira</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-@vite(['resources/css/app.css', 'resources/js/app.js'])
 
-<body class="min-h-screen font-sans antialiased bg-slate-200">
+<body class="min-h-screen font-sans antialiased bg-base-200">
 
     {{-- The navbar with `sticky` --}}
     <x-nav sticky>
@@ -19,7 +19,7 @@
                 <x-icon name="o-bars-3" class="cursor-pointer" />
             </label>
 
-            Lima's doces
+            LIMA's confeitaria caseira
 
         </x-slot:brand>
         <x-slot:actions>
@@ -32,13 +32,13 @@
     <x-main>
         {{-- It is a sidebar that works also as a drawer at small screens --}}
         {{-- Note `main-drawer` reference here --}}
-        <x-slot:sidebar class="bg-slate-300" drawer="main-drawer">
+        <x-slot:sidebar class="bg-[#e4aa43] text-white strong" drawer="main-drawer">
             <x-menu>
-                <x-menu-item title="Pedidos" icon="o-plus-circle" link="/pedidos" />
-                <x-menu-item title="Produtos" icon="o-heart" link="/produtos" />
-                <x-menu-item title="Categorias" icon="o-cake" link="/categorias" />
-                <x-menu-item title="Clientes" icon="s-users" link="/clientes" />
-                <x-menu-item title="Bairros" icon="o-home" link="/bairros" />
+                <x-menu-item title="Pedidos" icon="o-plus-circle" link="/pedidos" class="text-base" />
+                <x-menu-item title="Produtos" icon="o-heart" link="/produtos" class="text-base" />
+                <x-menu-item title="Categorias" icon="o-cake" link="/categorias" class="text-base" />
+                <x-menu-item title="Clientes" icon="s-users" link="/clientes" class="text-base" />
+                <x-menu-item title="Bairros" icon="o-home" link="/bairros" class="text-base" />
             </x-menu>
         </x-slot:sidebar>
 
