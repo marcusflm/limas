@@ -15,15 +15,15 @@ class ClienteIndex extends Component
 
     public $termo = '';
 
-    public function delete(int $id)
+    public function delete(Cliente $cliente)
     {
-        if (count(Pedido::where('cliente_id', $id)->get()) > 0) {
+        if ($cliente->pedidos()->count()) {
             $this->alert('error', 'Cliente possui pedidos!');
-        } else {
-            $cliente = Cliente::findOrFail($id);
-            $cliente->delete();
-            $this->alert('success', 'Cliente apagado!');
+            return;
         }
+
+        $cliente->delete();
+        $this->alert('success', 'Cliente apagado!');
     }
 
     public function render()
@@ -37,8 +37,14 @@ class ClienteIndex extends Component
             ['key' => 'bairro.nome', 'label' => 'Bairro'],
         ];
 
-        $clientes = Cliente::with('bairro')->where('nome', 'like', "%{$this->termo}%")->get();
+        $clientes = Cliente::query()
+            ->with('bairro')
+            ->where('nome', 'like', "%{$this->termo}%")
+            ->get();
 
-        return view('livewire.cliente.index', ['clientes' => $clientes, 'headers' => $headers]);
+        return view('livewire.cliente.index', [
+            'clientes' => $clientes,
+            'headers' => $headers
+        ]);
     }
 }

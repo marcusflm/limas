@@ -5,7 +5,8 @@
             <x-button icon="o-plus" class="btn-primary" @click="$wire.navegar('/clientes/create')" />
         </x-slot:actions>
     </x-header>
-    @if($clientes->count()>0)
+
+    @if($clientes->count() > 0)
     <x-card>
         <x-table :headers="$headers" :rows="$clientes" striped @row-click="$wire.navegar('/clientes/' + $event.detail.id)">
             @scope('actions', $cliente)
