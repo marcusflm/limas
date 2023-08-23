@@ -4,12 +4,14 @@ namespace App\Livewire\Categoria;
 
 use App\Models\Categoria;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class CategoriaCreate extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     #[Rule('required')]
     public $nome;

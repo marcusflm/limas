@@ -5,12 +5,14 @@ namespace App\Livewire\Produto;
 use App\Models\Categoria;
 use App\Models\Produto;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class ProdutoEdit extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public Produto $produto;
 
@@ -35,9 +37,13 @@ class ProdutoEdit extends Component
 
     public function save()
     {
-        $this->produto->update($this->validate());
+        if ($this->produto->update($this->validate())) {
+            $this->flash('success', 'Produto alterado com sucesso!', [], '/produtos');
+        } else {
+            $this->flash('error', 'Produto não foi alterado!');
+        }
 
-        return $this->redirect('/produtos', navigate: true);
+        // return $this->redirect('/produtos', navigate: true);
     }
 
     public function render()

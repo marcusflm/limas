@@ -5,12 +5,14 @@ namespace App\Livewire\Produto;
 use App\Models\Categoria;
 use App\Models\Produto;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class ProdutoCreate extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     #[Rule('required')]
     public $nome;

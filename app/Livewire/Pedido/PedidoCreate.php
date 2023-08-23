@@ -7,12 +7,14 @@ use App\Models\Pedido;
 use App\Models\Produto;
 use App\Models\StatusPedido;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class PedidoCreate extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public Pedido $pedido;
 

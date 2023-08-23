@@ -4,12 +4,14 @@ namespace App\Livewire\Categoria;
 
 use App\Models\Categoria;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class CategoriaEdit extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public Categoria $categoria;
 
@@ -23,9 +25,12 @@ class CategoriaEdit extends Component
 
     public function save()
     {
-        $this->categoria->update($this->validate());
-
-        return $this->redirect('/categorias', navigate: true);
+        if ($this->categoria->update($this->validate())) {
+            $this->flash('success', 'Categoria alterada com sucesso!', [], '/categorias');
+        } else {
+            $this->flash('error', 'Categoria não foi alterada!');
+        }
+        // return $this->redirect('/categorias', navigate: true);
     }
 
     public function render()

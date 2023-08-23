@@ -5,12 +5,14 @@ namespace App\Livewire\Cliente;
 use App\Models\Bairro;
 use App\Models\Cliente;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class ClienteCreate extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public Cliente $cliente;
 
