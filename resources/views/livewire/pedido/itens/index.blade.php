@@ -22,13 +22,13 @@
         </x-table>
         <div class="grid gap-3">
             <div class="flex justify-end">
-                <x-input label=Desconto wire:model="valor_desconto" thousands-separator="." fraction-separator="," />
+                <x-input label=Desconto wire:model="valor_desconto" thousands-separator="." fraction-separator="," money />
             </div>
             <div class="flex justify-end">
-                <x-input label="Frete" wire:model.live="valor_frete" thousands-separator="." fraction-separator="," readonly />
+                <x-input label="Frete" wire:model="valor_frete" thousands-separator="." fraction-separator="," money readonly />
             </div>
             <div class="flex justify-end">
-                <x-input label="Total do pedido" wire:model.live="valor_total" thousands-separator="." fraction-separator="," readonly />
+                <x-input label="Total do pedido" wire:model="valor_total" thousands-separator="." fraction-separator="," money readonly />
             </div>
             <div class="flex justify-end gap-3">
                 <x-button label="Voltar" @click="$wire.navegar('/pedidos')" />

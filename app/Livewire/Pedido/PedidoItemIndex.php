@@ -17,13 +17,13 @@ class PedidoItemIndex extends Component
     public Pedido $pedido;
 
     #[Rule('decimal:0,2')]
-    public float $valor_desconto;
+    public $valor_desconto;
 
     #[Rule('decimal:0,2')]
-    public float $valor_total;
+    public $valor_total;
 
     #[Rule('decimal:0,2')]
-    public float $valor_frete;
+    public $valor_frete;
 
     public function mount()
     {
