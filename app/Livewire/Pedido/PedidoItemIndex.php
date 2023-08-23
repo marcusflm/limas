@@ -20,38 +20,38 @@ class PedidoItemIndex extends Component
     #[Rule('decimal:0,2')]
     public float $valor_total;
 
+    #[Rule('decimal:0,2')]
+    public float $valor_frete;
+
     public function mount()
     {
         $this->valor_desconto = $this->pedido->valor_desconto;
+        $this->valor_frete = $this->pedido->valor_frete;
         $this->valor_total = $this->pedido->valor_total;
     }
 
-    public function alterar_status_pedido(int $pedido_id)
+    public function alterar_status_pedido()
     {
-        $pedido = Pedido::findOrFail($pedido_id);
-        if ($pedido->status_pedido_id == 1) {
-            $pedido->status_pedido_id = 2;
-            $pedido->valor_desconto = $this->pedido->valor_desconto;
-            $pedido->valor_total = $this->pedido->valor_total - $this->pedido->valor_desconto;
-            $pedido->save();
+        if ($this->pedido->status_pedido_id == 1) {
+            $this->pedido->status_pedido_id = 2;
+            $this->pedido->valor_desconto = $this->valor_desconto;
+            $this->pedido->valor_total = $this->valor_total - $this->valor_desconto;
+            $this->pedido->save();
         }
-        // else {
-        //     $pedido->status_pedido_id = 1;
-        // }
     }
 
     public function delete(int $id)
     {
-        $item = ItensPedido::findOrFail($id);
-        $pedido_id = $item->pedido_id;
-        $valor_total_itens = $item->valor_total;
-        $item->delete();
+        if ($this->pedido->status_pedido_id == 1) {
+            $item = ItensPedido::findOrFail($id);
+            $valor_total_itens = $item->valor_total;
+            $item->delete();
 
-        $pedido = Pedido::findOrFail($pedido_id);
-        $pedido->valor_itens = $pedido->valor_itens - $valor_total_itens;
-        $pedido->valor_total = $pedido->valor_total - $valor_total_itens;
-        $pedido->save();
-        // $this->authorize('delete', $post);
+            $this->pedido->valor_itens = $this->pedido->valor_itens - $valor_total_itens;
+            $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
+            $this->pedido->save();
+        }
+        // $this->authorize('delete', $item);
 
     }
 
@@ -70,6 +70,9 @@ class PedidoItemIndex extends Component
         // $valor_desconto = $pedido->valor_desconto;
         // $pedido->valor_total = $pedido->valor_total - $valor_desconto;
 
-        return view('livewire.pedido.itens.index', ['headers' => $headers, 'itensPedido' => $itensPedido]);
+        return view('livewire.pedido.itens.index', [
+            'headers' => $headers,
+            'itensPedido' => $itensPedido,
+        ]);
     }
 }

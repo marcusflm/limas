@@ -8,6 +8,8 @@ trait Navegavel
 
     public function navegar(string $url)
     {
-        return redirect()->to($url);
+        if ($url != null) {
+            return redirect()->to($url);
+        }
     }
 }

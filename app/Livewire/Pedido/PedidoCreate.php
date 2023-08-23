@@ -24,7 +24,7 @@ class PedidoCreate extends Component
             'valor_total' => $valor_frete
         ]);
 
-        return redirect()->to("/pedidos/{$pedido->id}");
+        return redirect()->to("/pedidos/{$pedido->id}/itens");
     }
 
     public function render()
