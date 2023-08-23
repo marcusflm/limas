@@ -41,7 +41,7 @@ class PedidoIndex extends Component
         ];
 
         $pedidos = Pedido::with('cliente')->with('status_pagamento')->with('status_pedido')->get();
-        // dd($pedidos);
+        // dd($this);
         // $pedidos = $pedidos->where("{$pedidos->cliente->nome}", 'like', "%{$this->termo}%");
 
         return view('livewire.pedido.index', ['pedidos' =>  $pedidos, 'headers' => $headers]);

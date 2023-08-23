@@ -1,7 +1,6 @@
 <div>
     <x-header title="Pedidos" separator>
         <x-slot:actions>
-            <x-input placeholder="Pesquisar..." wire:model.live="termo" icon="o-magnifying-glass" />
             <x-button icon="o-plus" class="btn-primary" @click="$wire.navegar('/pedidos/create')" />
         </x-slot:actions>
     </x-header>

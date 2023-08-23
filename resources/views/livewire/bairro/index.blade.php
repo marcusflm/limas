@@ -11,9 +11,6 @@
             @scope('cell_frete', $bairro)
             {{ number_format($bairro->frete, 2, ',', '.') }}
             @endscope
-            @scope('actions', $bairro)
-            <x-button icon="o-trash" wire:click="delete({{ $bairro->id }})" class="text-red-500 btn-sm" />
-            @endscope
         </x-table>
     </x-card>
     @else
