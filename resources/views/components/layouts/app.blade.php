@@ -18,9 +18,9 @@
             <label for="main-drawer" class="lg:hidden mr-3">
                 <x-icon name="o-bars-3" class="cursor-pointer" />
             </label>
-
-            LIMA's confeitaria caseira
-
+            <a href="/">
+                LIMA's confeitaria caseira
+            </a>
         </x-slot:brand>
         <x-slot:actions>
             <a href="###"><x-icon name="o-envelope" /> Messages</a>

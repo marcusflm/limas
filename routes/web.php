@@ -11,6 +11,7 @@ use App\Livewire\Categoria\CategoriaIndex;
 use App\Livewire\Cliente\ClienteCreate;
 use App\Livewire\Cliente\ClienteIndex;
 use App\Livewire\Cliente\ClienteEdit;
+use App\Livewire\Index;
 use App\Livewire\Pedido\PedidoCreate;
 use App\Livewire\Pedido\PedidoIndex;
 use App\Livewire\Pedido\PedidoItemIndex;
@@ -19,7 +20,7 @@ use App\Livewire\Produto\ProdutoCreate;
 use App\Livewire\Produto\ProdutoEdit;
 use App\Livewire\Produto\ProdutoIndex;
 
-// Route::get('/', Pedidos::class);
+Route::get('/', Index::class);
 Route::get('/pedidos', PedidoIndex::class);
 Route::get('/pedidos/create', PedidoCreate::class);
 Route::get('/pedidos/{pedido}/itens', PedidoItemIndex::class);
