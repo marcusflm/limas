@@ -2,15 +2,31 @@
 
 namespace App\Livewire\Produto;
 
+use App\Models\ItensPedido;
 use App\Models\Produto;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class ProdutoIndex extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public $termo = '';
+
+    public function delete(int $id)
+    {
+        if (count(ItensPedido::where('produto_id', $id)->get()) > 0) {
+            $this->alert('error', 'Produto está sendo usado!');
+        } else {
+            $produto = Produto::findOrFail($id);
+            $produto->delete();
+            $this->alert('success', 'Produto apagado!');
+        }
+        // $this->authorize('delete', $post);
+
+    }
 
     public function render()
     {

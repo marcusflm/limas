@@ -6,6 +6,7 @@ use App\Models\ItensPedido;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Traits\Navegavel;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class PedidoItemCreate extends Component
@@ -14,7 +15,9 @@ class PedidoItemCreate extends Component
 
     public Pedido $pedido;
 
+    #[Rule('required')]
     public $produto_id;
+
     public $quantidade = 1;
 
     public function aumentar()
@@ -35,20 +38,20 @@ class PedidoItemCreate extends Component
         $valor_unitario = $produto->valor;
         $valor_total = $valor_unitario * $this->quantidade;
 
-        ItensPedido::create([
+        if (ItensPedido::create([
             'pedido_id' => $this->pedido->id,
             'produto_id' => $this->produto_id,
             'valor_unitario' => $valor_unitario,
             'quantidade' => $this->quantidade,
             'valor_total' =>  $valor_total
-        ]);
-
-        $pedido = Pedido::find($this->pedido->id);
-        $pedido->valor_itens = $pedido->valor_itens + $valor_total;
-        $pedido->valor_total = $pedido->valor_total + $valor_total;
-        $pedido->save();
-
-        return redirect()->to("pedidos/{$this->pedido->id}/itens");
+        ])) {
+            $this->pedido->valor_itens = $this->pedido->valor_itens + $valor_total;
+            $this->pedido->valor_total = $this->pedido->valor_total + $valor_total;
+            $this->pedido->save();
+            $this->flash('success', 'Item adicionado com sucesso!', [], "pedidos/{$this->pedido->id}/itens");
+        } else {
+            $this->flash('error', 'Item não foi adicionado!');
+        }
     }
 
     public function render()

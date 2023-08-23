@@ -28,9 +28,11 @@ class ClienteCreate extends Component
 
     public function save()
     {
-        Cliente::create($this->validate());
-
-        return redirect()->to('/clientes');
+        if (Cliente::create($this->validate())) {
+            $this->flash('success', 'Cliente criado com sucesso!', [], '/clientes');
+        } else {
+            $this->flash('error', 'Cliente não foi criado!');
+        }
     }
 
     public function render()

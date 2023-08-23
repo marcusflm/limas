@@ -4,15 +4,28 @@ namespace App\Livewire\Pedido;
 
 use App\Models\Pedido;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class PedidoIndex extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public Pedido $pedido;
 
     public $termo = '';
+
+    public function delete(int $id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        if ($pedido->status_pedido_id == 1) {
+            $pedido->delete();
+            $this->alert('success', 'Pedido apagado!');
+        } else {
+            $this->alert('error', 'Pedido está fechado!');
+        }
+    }
 
     public function altera_status_pagamento(int $pedido_id)
     {

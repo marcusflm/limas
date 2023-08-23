@@ -7,7 +7,11 @@
     </x-header>
     @if($clientes->count()>0)
     <x-card>
-        <x-table :headers="$headers" :rows="$clientes" striped @row-click="$wire.navegar('/clientes/'+$event.detail.id)" />
+        <x-table :headers="$headers" :rows="$clientes" striped @row-click="$wire.navegar('/clientes/'+$event.detail.id)">
+            @scope('actions', $cliente)
+            <x-button icon="o-trash" wire:click="delete({{ $cliente->id }})" class="btn-sm btn-outline btn-error" />
+            @endscope
+        </x-table>
     </x-card>
     @else
     <x-alert icon="o-user" title="Nenhum cliente encontrado" />

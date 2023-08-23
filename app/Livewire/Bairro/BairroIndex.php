@@ -3,22 +3,29 @@
 namespace App\Livewire\Bairro;
 
 use App\Models\Bairro;
+use App\Models\Cliente;
 use App\Traits\Navegavel;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class BairroIndex extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public string $termo = '';
 
     public function delete(int $id)
     {
-        $bairro = Bairro::findOrFail($id);
-
+        if (count(Cliente::where('bairro_id', $id)->get()) > 0) {
+            $this->alert('error', 'Bairro está sendo usado!');
+        } else {
+            $bairro = Bairro::findOrFail($id);
+            $bairro->delete();
+            $this->alert('success', 'Bairro apagado!');
+        }
         // $this->authorize('delete', $post);
 
-        $bairro->delete();
     }
 
     public function render()

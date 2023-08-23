@@ -5,12 +5,14 @@ namespace App\Livewire\Pedido;
 use App\Models\ItensPedido;
 use App\Models\Pedido;
 use App\Traits\Navegavel;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class PedidoItemIndex extends Component
 {
     use Navegavel;
+    use LivewireAlert;
 
     public Pedido $pedido;
 
@@ -37,6 +39,7 @@ class PedidoItemIndex extends Component
             $this->pedido->valor_desconto = $this->valor_desconto;
             $this->pedido->valor_total = $this->valor_total - $this->valor_desconto;
             $this->pedido->save();
+            $this->alert('success', 'Pedido foi fechado com sucesso!');
         }
     }
 
@@ -50,9 +53,19 @@ class PedidoItemIndex extends Component
             $this->pedido->valor_itens = $this->pedido->valor_itens - $valor_total_itens;
             $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
             $this->pedido->save();
+        } else {
+            $this->alert('error', 'Pedido está fechado!');
         }
         // $this->authorize('delete', $item);
+    }
 
+    public function cadastrar()
+    {
+        if ($this->pedido->status_pedido_id == 1) {
+            return redirect()->to("'/pedidos/' + {{$this->pedido->id}} + '/itens/create'");
+        } else {
+            $this->alert('error', 'Pedido está fechado!');
+        }
     }
 
     public function render()

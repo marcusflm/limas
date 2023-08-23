@@ -29,11 +29,11 @@
             @endscope
 
             @scope('actions', $pedido)
-            <div class="flex">
-                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn + {{ $pedido->status_pagamento->id == 1 ? 'btn-outline btn-error' : 'bg-success text-white'}}" />
+            <div class="flex gap-3">
+                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm + {{ $pedido->status_pagamento->id == 1 ? 'btn-outline btn-error' : 'bg-success text-white'}}" />
+                <x-button icon="o-trash" wire:click="delete({{ $pedido->id }})" class="btn-sm btn-outline btn-error" />
             </div>
             @endscope
-
         </x-table>
     </x-card>
     @else

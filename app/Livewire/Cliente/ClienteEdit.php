@@ -36,10 +36,11 @@ class ClienteEdit extends Component
 
     function save()
     {
-        // dd($this);
-        $this->cliente->update($this->validate());
-
-        return redirect()->to('/clientes');
+        if ($this->cliente->update($this->validate())) {
+            $this->flash('success', 'Cliente alterado com sucesso!', [], '/clientes');
+        } else {
+            $this->flash('error', 'Cliente não foi alterado!');
+        }
     }
 
 

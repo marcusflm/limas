@@ -1,10 +1,8 @@
 <div>
     <x-header title="Itens Pedido {{$pedido->id}}" subtitle="Cliente: {{$pedido->cliente->nome}}" separator>
-        @if($pedido->status_pedido_id == 1)
         <x-slot:actions>
-            <x-button icon="o-plus" class="btn-primary" @click="$wire.navegar('/pedidos/' + {{$pedido->id}} + '/itens/create')" />
+            <x-button icon="o-plus" class="btn-primary" wire:click="cadastrar" />
         </x-slot:actions>
-        @endif
     </x-header>
 
     @if($itensPedido->count()>0)

@@ -11,6 +11,9 @@
             @scope('cell_valor', $produto)
             {{ number_format($produto->valor, 2, ',', '.') }}
             @endscope
+            @scope('actions', $produto)
+            <x-button icon="o-trash" wire:click="delete({{ $produto->id }})" class="btn-sm btn-outline btn-error" />
+            @endscope
         </x-table>
     </x-card>
     @else
