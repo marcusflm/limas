@@ -1,8 +1,10 @@
 <div>
     <x-header title="Itens Pedido {{$pedido->id}}" subtitle="Cliente: {{$pedido->cliente->nome}}" separator>
+        @if($pedido->status_pedido_id == 1)
         <x-slot:actions>
-            <x-button icon="o-plus" class="btn-primary" @click="$wire.navegar({{$pedido->status_pedido_id}} == 1 ?? '/pedidos/' + {{$pedido->id}} + '/itens/create')" />
+            <x-button icon="o-plus" class="btn-primary" @click="$wire.navegar('/pedidos/' + {{$pedido->id}} + '/itens/create')" />
         </x-slot:actions>
+        @endif
     </x-header>
 
     @if($itensPedido->count()>0)
@@ -34,6 +36,7 @@
         </div>
         <br>
         <div class="flex justify-end">
+            <x-button label="Voltar" @click="$wire.navegar('/pedidos')" />
             <x-button label="{{ $pedido->status_pedido_id == 1 ? 'Fechar pedido' : 'Pedido fechado' }}" icon="{{ $pedido->status_pedido_id == 1 ? 'o-lock-open' : 'o-lock-closed' }}" wire:click="alterar_status_pedido" class="btn + {{ $pedido->status_pedido_id == 1 ? 'btn-outline btn-primary' : 'bg-primary text-white'}}" />
         </div>
     </x-card>
