@@ -62,7 +62,7 @@ class PedidoItemIndex extends Component
     public function cadastrar()
     {
         if ($this->pedido->status_pedido_id == 1) {
-            return redirect()->to("'/pedidos/' + {{$this->pedido->id}} + '/itens/create'");
+            return redirect()->to("/pedidos/{$this->pedido->id}/itens/create");
         } else {
             $this->alert('error', 'Pedido está fechado!');
         }
