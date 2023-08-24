@@ -5,11 +5,12 @@ namespace App\Livewire\Pedido;
 use App\Models\ItensPedido;
 use App\Models\Pedido;
 use App\Traits\Navegavel;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class PedidoItemIndex extends Component
+class PedidoShow extends Component
 {
     use Navegavel;
     use LivewireAlert;
@@ -50,13 +51,21 @@ class PedidoItemIndex extends Component
             return;
         }
 
-        $valor_total_itens = $item->valor_total;
-        $item->delete();
+        try {
+            DB::beginTransaction();
 
-        $this->pedido->valor_itens = $this->pedido->valor_itens - $valor_total_itens;
-        $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
-        $this->pedido->save();
-        // $this->authorize('delete', $item);
+            $valor_total_itens = $item->valor_total;
+            $item->delete();
+
+            $this->pedido->valor_itens = $this->pedido->valor_itens - $valor_total_itens;
+            $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
+            $this->pedido->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->alert('error', 'Erro ao deletar item!');
+        }
     }
 
     public function cadastrar()
@@ -83,7 +92,7 @@ class PedidoItemIndex extends Component
         // $valor_desconto = $pedido->valor_desconto;
         // $pedido->valor_total = $pedido->valor_total - $valor_desconto;
 
-        return view('livewire.pedido.itens.index', [
+        return view('livewire.pedido.show', [
             'headers' => $headers,
             'itensPedido' => $itensPedido,
         ]);

@@ -13,15 +13,15 @@ class CategoriaIndex extends Component
     use Navegavel;
     use LivewireAlert;
 
-    public function delete(int $id)
+    public function delete(Categoria $categoria)
     {
-        if (count(Produto::where('categoria_id', $id)->get()) > 0) {
+        if ($categoria->produtos()->count()) {
             $this->alert('error', 'Categoria está sendo usada!');
-        } else {
-            $categoria = Categoria::findOrFail($id);
-            $categoria->delete();
-            $this->alert('success', 'Categoria apagada!');
+            return;
         }
+
+        $categoria->delete();
+        $this->alert('success', 'Categoria apagada!');
     }
 
     public function render()

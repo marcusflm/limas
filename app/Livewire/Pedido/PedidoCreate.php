@@ -21,6 +21,8 @@ class PedidoCreate extends Component
 
     public function save()
     {
+        $this->validate();
+
         $cliente = Cliente::with('bairro')->where('id', $this->cliente_id)->first();
         $valor_frete = $cliente->bairro->frete;
 

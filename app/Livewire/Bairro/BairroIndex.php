@@ -15,17 +15,15 @@ class BairroIndex extends Component
 
     public string $termo = '';
 
-    public function delete(int $id)
+    public function delete(Bairro $bairro)
     {
-        if (count(Cliente::where('bairro_id', $id)->get()) > 0) {
+        if ($bairro->clientes()->count()) {
             $this->alert('error', 'Bairro está sendo usado!');
-        } else {
-            $bairro = Bairro::findOrFail($id);
-            $bairro->delete();
-            $this->alert('success', 'Bairro apagado!');
+            return;
         }
-        // $this->authorize('delete', $post);
 
+        $bairro->delete();
+        $this->alert('success', 'Bairro apagado!');
     }
 
     public function render()

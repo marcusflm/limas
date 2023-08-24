@@ -3,7 +3,6 @@
 namespace App\Livewire\Cliente;
 
 use App\Models\Cliente;
-use App\Models\Pedido;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;

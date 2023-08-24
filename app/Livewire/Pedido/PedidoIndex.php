@@ -16,20 +16,19 @@ class PedidoIndex extends Component
 
     public $termo = '';
 
-    public function delete(int $id)
+    public function delete(Pedido $pedido)
     {
-        $pedido = Pedido::findOrFail($id);
-        if ($pedido->status_pedido_id == 1) {
-            $pedido->delete();
-            $this->alert('success', 'Pedido apagado!');
-        } else {
+        if ($pedido->status_pedido_id != 1) {
             $this->alert('error', 'Pedido está fechado!');
+            return;
         }
+
+        $pedido->delete();
+        $this->alert('success', 'Pedido apagado!');
     }
 
-    public function altera_status_pagamento(int $pedido_id)
+    public function altera_status_pagamento(Pedido $pedido)
     {
-        $pedido = Pedido::findOrFail($pedido_id);
         if ($pedido->status_pagamento_id == 1) {
             $pedido->status_pagamento_id = 2;
         } else {

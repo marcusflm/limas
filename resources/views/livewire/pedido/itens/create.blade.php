@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <x-slot:actions>
-                    <x-button label="Cancelar" @click="$wire.navegar('/pedidos/' + {{$pedido->id}} + '/itens')" />
+                    <x-button label="Cancelar" @click="$wire.navegar('/pedidos/' + {{$pedido->id}})" />
                     <x-button label="Cadastrar" class="btn-primary" type="submit" spinner="save" />
                 </x-slot:actions>
             </x-form>
