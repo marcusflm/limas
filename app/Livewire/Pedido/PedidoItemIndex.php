@@ -39,23 +39,23 @@ class PedidoItemIndex extends Component
             $this->pedido->valor_desconto = $this->valor_desconto;
             $this->pedido->valor_total = $this->valor_total - $this->valor_desconto;
             $this->pedido->save();
-            $this->alert('success', 'Pedido foi fechado com sucesso!');
+            $this->flash('success', 'Pedido fechado com sucesso!', [], '/pedidos');
         }
     }
 
-    public function delete(int $id)
+    public function delete(ItensPedido $item)
     {
-        if ($this->pedido->status_pedido_id == 1) {
-            $item = ItensPedido::findOrFail($id);
-            $valor_total_itens = $item->valor_total;
-            $item->delete();
-
-            $this->pedido->valor_itens = $this->pedido->valor_itens - $valor_total_itens;
-            $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
-            $this->pedido->save();
-        } else {
+        if ($this->pedido->status_pedido_id != 1) {
             $this->alert('error', 'Pedido está fechado!');
+            return;
         }
+
+        $valor_total_itens = $item->valor_total;
+        $item->delete();
+
+        $this->pedido->valor_itens = $this->pedido->valor_itens - $valor_total_itens;
+        $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
+        $this->pedido->save();
         // $this->authorize('delete', $item);
     }
 

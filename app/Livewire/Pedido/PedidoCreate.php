@@ -4,8 +4,6 @@ namespace App\Livewire\Pedido;
 
 use App\Models\Cliente;
 use App\Models\Pedido;
-use App\Models\Produto;
-use App\Models\StatusPedido;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
@@ -32,7 +30,7 @@ class PedidoCreate extends Component
             'valor_frete' => $valor_frete,
             'valor_total' => $valor_frete
         ])) {
-            $this->flash('success', 'Pedido criado com sucesso!', [], "pedidos/{$pedido->id}/itens");
+            return redirect()->to("pedidos/{$pedido->id}");
         } else {
             $this->flash('error', 'Pedido não foi criado!');
         }

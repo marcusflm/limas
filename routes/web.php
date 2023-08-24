@@ -23,7 +23,7 @@ use App\Livewire\Produto\ProdutoIndex;
 Route::get('/', Index::class);
 Route::get('/pedidos', PedidoIndex::class);
 Route::get('/pedidos/create', PedidoCreate::class);
-Route::get('/pedidos/{pedido}/itens', PedidoItemIndex::class);
+Route::get('/pedidos/{pedido}', PedidoItemIndex::class);
 Route::get('/pedidos/{pedido}/itens/create', PedidoItemCreate::class);
 
 Route::get('/produtos', ProdutoIndex::class);

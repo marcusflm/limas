@@ -50,7 +50,7 @@ class PedidoItemCreate extends Component
             $this->pedido->valor_itens = $this->pedido->valor_itens + $valor_total;
             $this->pedido->valor_total = $this->pedido->valor_total + $valor_total;
             $this->pedido->save();
-            $this->flash('success', 'Item adicionado com sucesso!', [], "pedidos/{$this->pedido->id}/itens");
+            return redirect()->to("pedidos/{$this->pedido->id}");
         } else {
             $this->flash('error', 'Item não foi adicionado!');
         }
