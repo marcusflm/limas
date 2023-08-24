@@ -21,9 +21,6 @@ class ProdutoCreate extends Component
     public $valor;
 
     #[Rule('required')]
-    public $descricao;
-
-    #[Rule('required')]
     public $categoria_id;
 
     public function save()

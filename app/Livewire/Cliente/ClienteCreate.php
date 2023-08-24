@@ -17,7 +17,7 @@ class ClienteCreate extends Component
     #[Rule('required')]
     public $nome;
 
-    #[Rule('required|min:10')]
+    #[Rule('required|min:10|max:11')]
     public $telefone;
 
     #[Rule('required|email')]

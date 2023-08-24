@@ -28,7 +28,7 @@ Route::get('/pedidos/{pedido}/itens/create', PedidoItemCreate::class);
 
 Route::get('/produtos', ProdutoIndex::class);
 Route::get('/produtos/create', ProdutoCreate::class);
-Route::get('/produtos/{produto}', ProdutoEdit::class);
+Route::get('/produtos/{produto}/edit', ProdutoEdit::class);
 
 Route::get('/categorias', CategoriaIndex::class);
 Route::get('/categorias/create', CategoriaCreate::class);

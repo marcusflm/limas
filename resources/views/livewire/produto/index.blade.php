@@ -7,7 +7,7 @@
     </x-header>
     @if($produtos->count()>0)
     <x-card>
-        <x-table :headers="$headers" :rows="$produtos" striped @row-click="$wire.navegar('/produtos/' + $event.detail.id)">
+        <x-table :headers="$headers" :rows="$produtos" striped @row-click="$wire.navegar('/produtos/' + $event.detail.id + '/edit')">
             @scope('cell_valor', $produto)
             {{ number_format($produto->valor, 2, ',', '.') }}
             @endscope
