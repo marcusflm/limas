@@ -14,4 +14,5 @@
             </x-form>
         </x-card>
     </div>
+    <livewire:pedido.pedido-index />
 </div>
