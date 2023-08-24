@@ -6,6 +6,7 @@ use App\Models\ItensPedido;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Traits\Navegavel;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -36,23 +37,33 @@ class PedidoItemCreate extends Component
 
     public function save()
     {
+        $this->validate();
+
         $produto = Produto::where('id', $this->produto_id)->first();
         $valor_unitario = $produto->valor;
         $valor_total = $valor_unitario * $this->quantidade;
 
-        if (ItensPedido::create([
-            'pedido_id' => $this->pedido->id,
-            'produto_id' => $this->produto_id,
-            'valor_unitario' => $valor_unitario,
-            'quantidade' => $this->quantidade,
-            'valor_total' =>  $valor_total
-        ])) {
+        try {
+            DB::beginTransaction();
+
+            ItensPedido::create([
+                'pedido_id' => $this->pedido->id,
+                'produto_id' => $this->produto_id,
+                'valor_unitario' => $valor_unitario,
+                'quantidade' => $this->quantidade,
+                'valor_total' =>  $valor_total
+            ]);
+
             $this->pedido->valor_itens = $this->pedido->valor_itens + $valor_total;
             $this->pedido->valor_total = $this->pedido->valor_total + $valor_total;
             $this->pedido->save();
+
+            DB::commit();
+
             return redirect()->to("pedidos/{$this->pedido->id}");
-        } else {
-            $this->flash('error', 'Item não foi adicionado!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            $this->alert('error', 'Item não foi adicionado!');
         }
     }
 

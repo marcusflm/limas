@@ -14,8 +14,6 @@ class ClienteCreate extends Component
     use Navegavel;
     use LivewireAlert;
 
-    public Cliente $cliente;
-
     #[Rule('required')]
     public $nome;
 

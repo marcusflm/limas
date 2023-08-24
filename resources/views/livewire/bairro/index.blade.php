@@ -7,8 +7,6 @@
     </x-header>
     @if($bairros->count()>0)
     <x-card>
-        <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
-        <x-livewire-alert::flash />
         <x-table :headers="$headers" :rows="$bairros" striped @row-click="$wire.navegar('/bairros/'+$event.detail.id)">
             @scope('cell_frete', $bairro)
             {{ number_format($bairro->frete, 2, ',', '.') }}

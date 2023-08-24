@@ -31,7 +31,7 @@ class BairroIndex extends Component
     public function render()
     {
         $headers = [
-            ['key' => 'id', 'label' => '#'],
+            ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
             ['key' => 'nome', 'label' => 'Nome'],
             ['key' => 'frete', 'label' => 'Valor Frete'],
         ];
