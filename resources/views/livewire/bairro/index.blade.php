@@ -5,7 +5,7 @@
             <x-button icon="o-plus" class="btn-primary" @click="$wire.create" />
         </x-slot:actions>
     </x-header>
-    <x-modal wire:model="myModal" title="{{ $bairro == null ? 'Novo bairro' : 'Editar bairro' }}" separator>
+    <x-modal wire:model="myModal" title="{{ $bairro == null ? 'Novo bairro' : 'Editar bairro' }}">
         @if($bairro)
         <livewire:bairro.bairro-edit :$bairro />
         @else

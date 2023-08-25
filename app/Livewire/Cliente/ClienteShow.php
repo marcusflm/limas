@@ -9,7 +9,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-class ClienteEdit extends Component
+class ClienteShow extends Component
 {
     use Navegavel;
     use LivewireAlert;
@@ -38,10 +38,16 @@ class ClienteEdit extends Component
         $this->bairro_id = $this->cliente->bairro_id;
     }
 
+    public function edit(Cliente $cliente)
+    {
+
+        dd($cliente);
+    }
+
     public function save()
     {
         if ($this->cliente->update($this->validate())) {
-            $this->flash('success', 'Cliente alterado com sucesso!', [], "/clientes/{$this->cliente->id}");
+            $this->flash('success', 'Cliente alterado com sucesso!', [], '/clientes');
         } else {
             $this->flash('error', 'Cliente não foi alterado!');
         }
@@ -49,6 +55,6 @@ class ClienteEdit extends Component
 
     public function render()
     {
-        return view('livewire.cliente.edit', ['bairros' => Bairro::all()]);
+        return view('livewire.cliente.show');
     }
 }

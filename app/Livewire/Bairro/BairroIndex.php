@@ -20,7 +20,6 @@ class BairroIndex extends Component
 
     public bool $myModal = false;
 
-
     public function edit(Bairro $bairro)
     {
         $this->bairro = $bairro;
@@ -32,7 +31,6 @@ class BairroIndex extends Component
         unset($this->bairro);
         $this->myModal = true;
     }
-
 
     public function delete(Bairro $bairro)
     {

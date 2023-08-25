@@ -11,6 +11,7 @@ use App\Livewire\Categoria\CategoriaIndex;
 use App\Livewire\Cliente\ClienteCreate;
 use App\Livewire\Cliente\ClienteIndex;
 use App\Livewire\Cliente\ClienteEdit;
+use App\Livewire\Cliente\ClienteShow;
 use App\Livewire\Index;
 use App\Livewire\Pedido\PedidoCreate;
 use App\Livewire\Pedido\PedidoIndex;
@@ -36,7 +37,7 @@ Route::get('/categorias/{categoria}', CategoriaEdit::class);
 
 Route::get('/clientes', ClienteIndex::class);
 Route::get('/clientes/create', ClienteCreate::class);
-Route::get('/clientes/{cliente}', ClienteEdit::class);
+Route::get('/clientes/{cliente}', ClienteShow::class);
 
 Route::get('/bairros', BairroIndex::class);
 Route::get('/bairros/create', BairroCreate::class);

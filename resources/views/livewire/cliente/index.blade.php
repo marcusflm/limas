@@ -2,10 +2,12 @@
     <x-header title="Clientes" separator>
         <x-slot:actions>
             <x-input placeholder="Pesquisar..." wire:model.live="termo" icon="o-magnifying-glass" />
-            <x-button icon="o-plus" class="btn-primary" @click="$wire.navegar('/clientes/create')" />
+            <x-button icon="o-plus" class="btn-primary" @click="$wire.create" />
         </x-slot:actions>
     </x-header>
-
+    <x-modal wire:model="myModal" title="Novo cliente">
+        <livewire:cliente.cliente-create />
+    </x-modal>
     @if($clientes->count() > 0)
     <x-card>
         <x-table :headers="$headers" :rows="$clientes" striped @row-click="$wire.navegar('/clientes/' + $event.detail.id)">

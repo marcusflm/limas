@@ -3,7 +3,6 @@
 namespace App\Livewire\Categoria;
 
 use App\Models\Categoria;
-use App\Models\Produto;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -12,6 +11,22 @@ class CategoriaIndex extends Component
 {
     use Navegavel;
     use LivewireAlert;
+
+    public Categoria $categoria;
+
+    public bool $myModal = false;
+
+    public function edit(Categoria $categoria)
+    {
+        $this->categoria = $categoria;
+        $this->myModal = true;
+    }
+
+    public function create()
+    {
+        unset($this->categoria);
+        $this->myModal = true;
+    }
 
     public function delete(Categoria $categoria)
     {

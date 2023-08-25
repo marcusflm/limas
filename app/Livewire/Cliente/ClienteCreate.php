@@ -17,7 +17,7 @@ class ClienteCreate extends Component
     #[Rule('required')]
     public $nome;
 
-    #[Rule('required|min:10|max:11')]
+    #[Rule('required|min:10|max:14')]
     public $telefone;
 
     #[Rule('required|email')]
@@ -31,7 +31,7 @@ class ClienteCreate extends Component
         if (Cliente::create($this->validate())) {
             $this->flash('success', 'Cliente criado com sucesso!', [], '/clientes');
         } else {
-            $this->flash('error', 'Cliente não foi criado!');
+            $this->flash('error', 'Cliente não foi criado!', [], '/clientes');
         }
     }
 

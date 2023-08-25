@@ -12,7 +12,17 @@ class ClienteIndex extends Component
     use Navegavel;
     use LivewireAlert;
 
-    public $termo = '';
+    public Cliente $cliente;
+
+    public string $termo = '';
+
+    public bool $myModal = false;
+
+    public function create()
+    {
+        unset($this->cliente);
+        $this->myModal = true;
+    }
 
     public function delete(Cliente $cliente)
     {

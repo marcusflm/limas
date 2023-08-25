@@ -30,9 +30,9 @@ class BairroEdit extends Component
     public function save()
     {
         if ($this->bairro->update($this->validate())) {
-            $this->alert('success', 'Bairro alterado com sucesso!');
+            $this->flash('success', 'Bairro alterado com sucesso!', [], '/bairros');
         } else {
-            $this->alert('error', 'Bairro não foi alterado!');
+            $this->flash('error', 'Bairro não foi alterado!', [], '/bairros');
         }
         // return $this->redirect('/bairros', navigate: true);
     }
