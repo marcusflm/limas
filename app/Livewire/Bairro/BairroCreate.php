@@ -5,6 +5,7 @@ namespace App\Livewire\Bairro;
 use App\Models\Bairro;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -24,9 +25,9 @@ class BairroCreate extends Component
     public function save()
     {
         if (Bairro::create($this->validate())) {
-            $this->flash('success', 'Bairro criado com sucesso!', [], '/bairros');
+            $this->alert('success', 'Bairro criado com sucesso!');
         } else {
-            $this->flash('error', 'Bairro não foi criado!');
+            $this->alert('error', 'Bairro não foi criado!');
         }
     }
 
