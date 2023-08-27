@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome',100);
-            $table->decimal('valor',10,2);
-            $table->text('descricao',255);
+            $table->string('nome', 100);
+            $table->decimal('valor', 10, 2);
+            $table->text('descricao', 255)->nullable();
             $table->integer('categoria_id')->unsigned();
 
             $table->timestamps();

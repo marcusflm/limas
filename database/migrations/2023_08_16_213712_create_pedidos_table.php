@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('valor_total', 10, 2);
             $table->integer('status_pedido_id')->unsigned()->default(1);
             $table->integer('status_pagamento_id')->unsigned()->default(1);
+            $table->text('observacao', 255)->nullable();
 
             $table->timestamps();
 

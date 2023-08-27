@@ -12,8 +12,6 @@ class ClienteIndex extends Component
     use Navegavel;
     use LivewireAlert;
 
-    public Cliente $cliente;
-
     public string $termo = '';
 
     public bool $myModal = false;
@@ -35,9 +33,25 @@ class ClienteIndex extends Component
         $this->alert('success', 'Cliente apagado!');
     }
 
+    public function formataTelefone($fone)
+    {
+        if (!$fone) {
+            return '';
+        }
+
+        if (strlen($fone) == 10) {
+            return '(' . substr($fone, 0, 2) . ') ' . substr($fone, 2, 4) . '-' . substr($fone, 6);
+        }
+
+        if (strlen($fone) == 11) {
+            return '(' . substr($fone, 0, 2) . ') ' . substr($fone, 2, 1) . ' ' . substr($fone, 3, 4) . '-' . substr($fone, 7);
+        }
+
+        return $fone;
+    }
+
     public function render()
     {
-
         $headers = [
             ['key' => 'id', 'label' => '#'],
             ['key' => 'nome', 'label' => 'Nome'],

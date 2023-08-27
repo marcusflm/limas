@@ -40,6 +40,12 @@ class ClienteEdit extends Component
 
     public function save()
     {
+        $this->telefone = preg_replace("/[^0-9]/", "", $this->telefone);
+
+        if (strlen($this->telefone) > 11) {
+            $this->telefone = substr($this->telefone, 1, 11);
+        }
+
         if ($this->cliente->update($this->validate())) {
             $this->flash('success', 'Cliente alterado com sucesso!', [], "/clientes/{$this->cliente->id}");
         } else {

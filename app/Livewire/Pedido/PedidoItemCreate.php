@@ -19,7 +19,7 @@ class PedidoItemCreate extends Component
     public Pedido $pedido;
 
     #[Rule('required')]
-    public $produto_id;
+    public $produto_id = null;
 
     public $quantidade = 1;
 
@@ -38,6 +38,11 @@ class PedidoItemCreate extends Component
     public function save()
     {
         $this->validate();
+
+        if (ItensPedido::where('produto_id', $this->produto_id)->where('pedido_id', $this->pedido->id)->count() > 0) {
+            $this->alert('error', 'Item já existe no pedido!');
+            return;
+        }
 
         $produto = Produto::where('id', $this->produto_id)->first();
         $valor_unitario = $produto->valor;
@@ -60,7 +65,7 @@ class PedidoItemCreate extends Component
 
             DB::commit();
 
-            return redirect()->to("pedidos/{$this->pedido->id}");
+            $this->flash('success', 'Item adicionado!', [], "/pedidos/{$this->pedido->id}");
         } catch (\Throwable $th) {
             DB::rollBack();
             $this->alert('error', 'Item não foi adicionado!');

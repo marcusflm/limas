@@ -23,12 +23,14 @@ class ProdutoCreate extends Component
     #[Rule('required')]
     public $categoria_id;
 
+    public $descricao;
+
     public function save()
     {
         if (Produto::create($this->validate())) {
             $this->flash('success', 'Produto criado com sucesso!', [], '/produtos');
         } else {
-            $this->flash('error', 'Produto não foi criado!');
+            $this->flash('error', 'Produto não foi criado!', [], '/produtos');
         }
     }
 

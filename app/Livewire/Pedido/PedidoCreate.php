@@ -5,6 +5,7 @@ namespace App\Livewire\Pedido;
 use App\Models\Cliente;
 use App\Models\Pedido;
 use App\Traits\Navegavel;
+use Illuminate\Database\Eloquent\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -17,11 +18,31 @@ class PedidoCreate extends Component
     public Pedido $pedido;
 
     #[Rule('required')]
-    public $cliente_id;
+    public $cliente_id = null;
+
+    public Collection $clientes;
+
+    public function mount()
+    {
+        $this->search();
+    }
+
+    public function search(string $value = '')
+    {
+        $this->clientes = Cliente::query()
+            ->where('nome', 'like', "%{$value}%")
+            ->take(5)
+            ->get();
+    }
 
     public function save()
     {
         $this->validate();
+
+        if (Pedido::where('cliente_id', $this->cliente_id)->where('status_pedido_id', 1)->count() > 0) {
+            $this->alert('error', 'Cliente com pedido aberto!');
+            return;
+        }
 
         $cliente = Cliente::with('bairro')->where('id', $this->cliente_id)->first();
         $valor_frete = $cliente->bairro->frete;
@@ -34,17 +55,12 @@ class PedidoCreate extends Component
         ])) {
             return redirect()->to("pedidos/{$pedido->id}");
         } else {
-            $this->flash('error', 'Pedido não foi criado!');
+            $this->flash('error', 'Pedido não foi criado!', [], "pedidos/{$pedido->id}");
         }
     }
 
     public function render()
     {
-        return view(
-            'livewire.pedido.create',
-            [
-                'clientes' => Cliente::all()
-            ]
-        );
+        return view('livewire.pedido.create');
     }
 }

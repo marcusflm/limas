@@ -12,7 +12,17 @@ class ProdutoIndex extends Component
     use Navegavel;
     use LivewireAlert;
 
+    public Produto $produto;
+
     public $termo = '';
+
+    public bool $myModal = false;
+
+    public function create()
+    {
+        unset($this->produto);
+        $this->myModal = true;
+    }
 
     public function delete(Produto $produto)
     {

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome',100);
-            $table->string('telefone',100);
-            $table->string('email',100);
+            $table->string('nome', 100);
+            $table->bigInteger('telefone');
+            $table->string('email', 100);
             $table->integer('bairro_id')->unsigned();
 
             $table->timestamps();

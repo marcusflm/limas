@@ -12,9 +12,14 @@ class PedidoIndex extends Component
     use Navegavel;
     use LivewireAlert;
 
-    public Pedido $pedido;
-
     public $termo = '';
+
+    public bool $myModal = false;
+
+    public function create()
+    {
+        $this->myModal = true;
+    }
 
     public function delete(Pedido $pedido)
     {
@@ -46,9 +51,6 @@ class PedidoIndex extends Component
             ['key' => 'data_pedido', 'label' => 'Data pedido'],
             ['key' => 'status_pagamento.nome', 'label' => 'Status pagamento'],
             ['key' => 'status_pedido.nome', 'label' => 'Status pedido'],
-            ['key' => 'valor_itens', 'label' => 'Subtotal'],
-            ['key' => 'valor_frete', 'label' => 'Frete'],
-            ['key' => 'valor_desconto', 'label' => 'Desconto'],
             ['key' => 'valor_total', 'label' => 'Total']
         ];
 

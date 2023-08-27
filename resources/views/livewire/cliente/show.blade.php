@@ -15,5 +15,22 @@
             <x-input label="Bairro" :value="$cliente->bairro->nome" readonly />
         </x-card>
     </div>
-    <livewire:pedido.pedido-index />
+    <br>
+    @if($pedidos->count() > 0)
+    <x-card>
+        <x-table :headers="$headers" :rows="$pedidos" striped @row-click="$wire.navegar('/pedidos/' + $event.detail.id)">
+            @scope('cell_data_pedido', $pedido)
+            {{ $pedido->data_pedido->format('d/m/Y') }}
+            @endscope
+
+            @scope('cell_valor_total', $pedido)
+            {{ number_format($pedido->valor_total, 2, ',', '.') }}
+            @endscope
+        </x-table>
+    </x-card>
+    @else
+    <x-card>
+        <x-alert icon="o-user" title="Não há pedidos para este cliente." />
+    </x-card>
+    @endif
 </div>
