@@ -29,8 +29,6 @@ class ClienteCreate extends Component
 
     public $bairros;
 
-    public $extract_phone_number_pattern = "/\\+?[1-9][0-9]{7,14}/";
-
     public function mount()
     {
         $this->search();

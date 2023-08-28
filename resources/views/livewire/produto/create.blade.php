@@ -1,7 +1,7 @@
 <div>
     <x-form wire:submit="save">
         <x-input label="Nome" wire:model.blur="nome" required />
-        <x-select label="Categoria" placeholder="Selecione uma categoria" :options="$categorias" option-value="id" option-label="nome" wire:model="categoria_id" />
+        <x-choices label="Categoria" wire:model="categoria_id" :options="$categorias" option-label="nome" icon="o-magnifying-glass" single searchable />
         <div class="w-1/2 lg:w-2/5 end-0">
             <x-input label="Valor" wire:model="valor" prefix="R$" thousands-separator="." fraction-separator="," money required />
         </div>
