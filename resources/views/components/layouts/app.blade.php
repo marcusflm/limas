@@ -24,6 +24,7 @@
         <x-slot:actions>
             <a href="###"><x-icon name="o-envelope" /> Messages</a>
             <a href="###"><x-icon name="o-bell" /> Notifications</a>
+            <a href="/logout"><x-icon name="s-arrow-long-right" /> Sair</a>
         </x-slot:actions>
     </x-nav>
     @endauth
