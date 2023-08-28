@@ -4,6 +4,7 @@ namespace App\Livewire\Pedido;
 
 use App\Models\Cliente;
 use App\Models\Pedido;
+use App\Models\StatusPedido;
 use App\Traits\Navegavel;
 use Illuminate\Database\Eloquent\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -39,7 +40,12 @@ class PedidoCreate extends Component
     {
         $this->validate();
 
-        if (Pedido::where('cliente_id', $this->cliente_id)->where('status_pedido_id', 1)->count() > 0) {
+        $temPedidoAberto = Pedido::query()
+            ->where('cliente_id', $this->cliente_id)
+            ->where('status_pedido_id', StatusPedido::ABERTO)
+            ->count() > 0;
+
+        if ($temPedidoAberto) {
             $this->alert('error', 'Cliente com pedido aberto!');
             return;
         }
@@ -47,16 +53,14 @@ class PedidoCreate extends Component
         $cliente = Cliente::with('bairro')->where('id', $this->cliente_id)->first();
         $valor_frete = $cliente->bairro->frete;
 
-        if ($pedido = Pedido::create([
+        $pedido = Pedido::create([
             'cliente_id' => $this->cliente_id,
             'data_pedido' => now(),
             'valor_frete' => $valor_frete,
             'valor_total' => $valor_frete
-        ])) {
-            return redirect()->to("pedidos/{$pedido->id}");
-        } else {
-            $this->flash('error', 'Pedido não foi criado!', [], "pedidos/{$pedido->id}");
-        }
+        ]);
+
+        return redirect()->to("pedidos/{$pedido->id}");
     }
 
     public function render()
