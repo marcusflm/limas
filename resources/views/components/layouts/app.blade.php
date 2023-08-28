@@ -9,6 +9,7 @@
 </head>
 
 <body class="min-h-screen font-sans antialiased bg-base-200">
+    @auth
     {{-- The navbar with `sticky` --}}
     <x-nav sticky>
         <x-slot:brand>
@@ -25,11 +26,13 @@
             <a href="###"><x-icon name="o-bell" /> Notifications</a>
         </x-slot:actions>
     </x-nav>
+    @endauth
 
     {{-- The main content --}}
     <x-main>
         {{-- It is a sidebar that works also as a drawer at small screens --}}
         {{-- Note `main-drawer` reference here --}}
+        @auth
         <x-slot:sidebar class="bg-[#e4aa43] text-white strong" drawer="main-drawer">
             <x-menu>
                 <x-menu-item title="Pedidos" icon="o-plus-circle" link="/pedidos" class="text-base" />
@@ -39,6 +42,7 @@
                 <x-menu-item title="Bairros" icon="o-home" link="/bairros" class="text-base" />
             </x-menu>
         </x-slot:sidebar>
+        @endauth
 
         {{-- The `$slot` goes here --}}
         <x-slot:content>

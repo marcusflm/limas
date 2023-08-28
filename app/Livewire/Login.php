@@ -13,8 +13,22 @@ class Login extends Component
 
     public string $senha = '';
 
-    public function autenticar(Request $request)
+    public function autenticar(Request $request): RedirectResponse
     {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     public function render()
