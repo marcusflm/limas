@@ -36,4 +36,9 @@ class Pedido extends Model
     {
         return $this->belongsTo(StatusPagamento::class);
     }
+
+    function isAberto(): bool
+    {
+        return $this->status_pedido_id == StatusPedido::ABERTO;
+    }
 }
