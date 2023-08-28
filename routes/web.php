@@ -7,7 +7,7 @@ use App\Livewire\Categoria\CategoriaIndex;
 use App\Livewire\Cliente\ClienteIndex;
 use App\Livewire\Cliente\ClienteShow;
 use App\Livewire\Index;
-use App\Livewire\Pedido\PedidoCreate;
+use App\Livewire\Login;
 use App\Livewire\Pedido\PedidoIndex;
 use App\Livewire\Pedido\PedidoItemCreate;
 use App\Livewire\Pedido\PedidoShow;
@@ -15,6 +15,8 @@ use App\Livewire\Produto\ProdutoIndex;
 use App\Livewire\Produto\ProdutoShow;
 
 Route::get('/', Index::class);
+
+Route::get('/login', Login::class)->name('login');
 
 Route::get('/pedidos', PedidoIndex::class);
 Route::get('/pedidos/{pedido}', PedidoShow::class);

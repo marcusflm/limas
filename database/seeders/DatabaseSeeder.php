@@ -10,11 +10,9 @@ use App\Models\Cliente;
 use App\Models\Produto;
 use App\Models\StatusPagamento;
 use App\Models\StatusPedido;
-use Faker\Core\Number;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -99,11 +97,14 @@ class DatabaseSeeder extends Seeder
                 'categoria_id' => 1
             ]
         ]);
-        // DB::table('users')->insert([
-        //     'name'=>Str::random(10),
-        //     'email'=> Str::random(10),'@gmail.com',
-        //     'password'=>Hash::make('password'),
-        // ]);
+
+        User::insert(
+            [
+                'name' => 'Marcus',
+                'email' => 'marcus@gmail.com',
+                'password' => Hash::make('12345')
+            ]
+        );
         //\App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
