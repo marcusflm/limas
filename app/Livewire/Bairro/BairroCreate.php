@@ -13,8 +13,6 @@ class BairroCreate extends Component
     use Navegavel;
     use LivewireAlert;
 
-    public Bairro $bairro;
-
     #[Rule('required')]
     public $nome;
 
@@ -23,11 +21,9 @@ class BairroCreate extends Component
 
     public function save()
     {
-        if (Bairro::create($this->validate())) {
-            $this->flash('success', 'Bairro criado com sucesso!', [], '/bairros');
-        } else {
-            $this->flash('error', 'Bairro não foi criado!', [], '/bairros');
-        }
+        Bairro::create($this->validate());
+        $this->alert('success', 'Bairro criado com sucesso!');
+        $this->dispatch('bairro-edicao-concluida');
     }
 
     public function render()

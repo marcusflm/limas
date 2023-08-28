@@ -5,14 +5,16 @@
             <x-button icon="o-plus" class="btn-primary" @click="$wire.create" />
         </x-slot:actions>
     </x-header>
-    <x-modal wire:model="myModal" title="{{ $bairro == null ? 'Novo bairro' : 'Editar bairro' }}">
+
+    <x-modal wire:model="myModal" :title="$bairro ? 'Editar bairro' : 'Novo bairro'">
         @if($bairro)
         <livewire:bairro.bairro-edit :$bairro />
         @else
         <livewire:bairro.bairro-create />
         @endif
     </x-modal>
-    @if($bairros->count()>0)
+
+    @if($bairros->count() > 0)
     <x-card>
         <x-table :headers="$headers" :rows="$bairros" striped @row-click="$wire.edit($event.detail.id)">
             @scope('cell_frete', $bairro)
