@@ -2,19 +2,14 @@
 
 namespace App\Livewire\Cliente;
 
-use App\Models\Bairro;
 use App\Models\Cliente;
 use App\Models\Pedido;
-use App\Traits\Navegavel;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class ClienteShow extends Component
 {
-    use Navegavel;
-    use LivewireAlert;
-
     public Cliente $cliente;
 
     #[Rule('required')]
@@ -31,6 +26,12 @@ class ClienteShow extends Component
 
     public bool $myModal = false;
 
+    #[On('cliente-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
+
     function mount()
     {
         $this->nome = $this->cliente->nome;
@@ -39,25 +40,8 @@ class ClienteShow extends Component
         $this->bairro_id = $this->cliente->bairro_id;
     }
 
-    public function edit(Cliente $cliente)
-    {
-
-        dd($cliente);
-    }
-
-    public function save()
-    {
-        if ($this->cliente->update($this->validate())) {
-            $this->flash('success', 'Cliente alterado com sucesso!', [], '/clientes');
-        } else {
-            $this->flash('error', 'Cliente não foi alterado!');
-        }
-    }
-
     public function render()
     {
-        $pedidos = Pedido::where('cliente_id', $this->cliente->id)->get();
-
         $headers = [
             ['key' => 'data_pedido', 'label' => 'Data pedido'],
             ['key' => 'status_pagamento.nome', 'label' => 'Status pagamento'],
@@ -65,11 +49,13 @@ class ClienteShow extends Component
             ['key' => 'valor_total', 'label' => 'Total']
         ];
 
+        $pedidos = Pedido::where('cliente_id', $this->cliente->id)->get();
+
         return view(
             'livewire.cliente.show',
             [
-                'pedidos' => $pedidos,
-                'headers' => $headers
+                'headers' => $headers,
+                'pedidos' => $pedidos
             ]
         );
     }
