@@ -5,23 +5,30 @@
             <x-button icon="o-plus" class="btn-primary" @click="$wire.create" />
         </x-slot:actions>
     </x-header>
+
     <x-modal wire:model="myModal" title="Novo produto">
         <livewire:produto.produto-create />
     </x-modal>
+
     @if($produtos->count()>0)
+
     <x-card>
         <x-table :headers="$headers" :rows="$produtos" striped @row-click="$wire.navegar('/produtos/' + $event.detail.id )">
             @scope('cell_valor', $produto)
             {{ number_format($produto->valor, 2, ',', '.') }}
             @endscope
+
             @scope('actions', $produto)
             <x-button icon="o-trash" wire:click="delete({{ $produto->id }})" class="btn-sm btn-outline btn-error" />
             @endscope
         </x-table>
     </x-card>
+
     @else
+
     <x-card>
         <x-alert icon="o-face-frown" title="Nenhum produto encontrado" />
     </x-card>
+
     @endif
 </div>

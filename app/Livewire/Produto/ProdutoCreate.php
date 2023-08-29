@@ -5,7 +5,6 @@ namespace App\Livewire\Produto;
 use App\Models\Categoria;
 use App\Models\Produto;
 use App\Traits\Navegavel;
-use Illuminate\Database\Eloquent\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -19,14 +18,14 @@ class ProdutoCreate extends Component
     public $nome;
 
     #[Rule('required|decimal:0,2')]
-    public $valor;
+    public $valor = 0;
 
     #[Rule('required')]
     public $categoria_id;
 
     public $descricao;
 
-    public Collection $categorias;
+    public $categorias;
 
     public function mount()
     {
@@ -43,11 +42,15 @@ class ProdutoCreate extends Component
 
     public function save()
     {
-        if (Produto::create($this->validate())) {
-            $this->flash('success', 'Produto criado com sucesso!', [], '/produtos');
-        } else {
-            $this->flash('error', 'Produto não foi criado!', [], '/produtos');
-        }
+        Produto::create($this->validate());
+        $this->alert('success', 'Produto criado com sucesso!');
+        unset(
+            $this->nome,
+            $this->valor,
+            $this->categoria_id,
+            $this->descricao
+        );
+        $this->dispatch('produto-edicao-concluida');
     }
 
     public function render()

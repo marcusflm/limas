@@ -56,6 +56,6 @@ class ClienteCreate extends Component
 
     public function render()
     {
-        return view('livewire.cliente.create', ['bairros' => Bairro::all()]);
+        return view('livewire.cliente.create');
     }
 }

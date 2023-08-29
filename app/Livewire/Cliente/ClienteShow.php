@@ -12,6 +12,8 @@ class ClienteShow extends Component
 {
     public Cliente $cliente;
 
+    public $pedidos;
+
     #[Rule('required')]
     public $nome;
 
@@ -38,6 +40,7 @@ class ClienteShow extends Component
         $this->telefone = $this->cliente->telefone;
         $this->email = $this->cliente->email;
         $this->bairro_id = $this->cliente->bairro_id;
+        $this->pedidos = Pedido::with('cliente')->get();
     }
 
     public function render()
@@ -49,13 +52,10 @@ class ClienteShow extends Component
             ['key' => 'valor_total', 'label' => 'Total']
         ];
 
-        $pedidos = Pedido::where('cliente_id', $this->cliente->id)->get();
-
         return view(
             'livewire.cliente.show',
             [
-                'headers' => $headers,
-                'pedidos' => $pedidos
+                'headers' => $headers
             ]
         );
     }
