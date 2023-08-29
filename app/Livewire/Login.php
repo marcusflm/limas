@@ -17,25 +17,16 @@ class Login extends Component
     public function autenticar()
     {
         if (Auth::attempt($this->validate())) {
+            request()->session()->regenerate();
 
-            // session_start();
-            // $request()->session()->regenerate();
-            // $_SESSION['email'] = $this->email;
-
-            return redirect()->to('/');
+            return $this->redirect('/', navigate: true);
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        $this->addError('password', 'Credenciais inválidas.');
     }
 
     public function render()
     {
-        if (Auth::check()) {
-            return view('livewire.index');
-        }
-
-        return view('livewire.login');
+        return Auth::user() ? view('livewire.index') : view('livewire.login');
     }
 }
