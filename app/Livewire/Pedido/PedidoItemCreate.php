@@ -39,7 +39,12 @@ class PedidoItemCreate extends Component
     {
         $this->validate();
 
-        if (ItensPedido::where('produto_id', $this->produto_id)->where('pedido_id', $this->pedido->id)->count() > 0) {
+        $produtoJaAdicionado = $this->pedido
+            ->itensPedido()
+            ->where('produto_id', $this->produto_id)
+            ->count();
+
+        if ($produtoJaAdicionado) {
             $this->alert('error', 'Item já existe no pedido!');
             return;
         }

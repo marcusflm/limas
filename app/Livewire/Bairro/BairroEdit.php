@@ -5,6 +5,7 @@ namespace App\Livewire\Bairro;
 use App\Models\Bairro;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -13,6 +14,7 @@ class BairroEdit extends Component
     use Navegavel;
     use LivewireAlert;
 
+    #[Reactive]
     public Bairro $bairro;
 
     #[Rule('required')]
@@ -21,7 +23,7 @@ class BairroEdit extends Component
     #[Rule('required|decimal:0,2')]
     public $frete;
 
-    function mount()
+    function boot()
     {
         $this->nome = $this->bairro->nome;
         $this->frete = $this->bairro->frete;
@@ -29,12 +31,9 @@ class BairroEdit extends Component
 
     public function save()
     {
-        if ($this->bairro->update($this->validate())) {
-            $this->flash('success', 'Bairro alterado com sucesso!', [], '/bairros');
-        } else {
-            $this->flash('error', 'Bairro não foi alterado!', [], '/bairros');
-        }
-        // return $this->redirect('/bairros', navigate: true);
+        $this->bairro->fresh()->update($this->validate());
+        $this->alert('success', 'Bairro alterado com sucesso!');
+        $this->dispatch('bairro-edicao-concluida');
     }
 
     public function render()

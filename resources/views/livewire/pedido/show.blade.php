@@ -1,11 +1,11 @@
 <div>
     <x-header title="Pedido {{$pedido->id}}" subtitle="Cliente: {{$pedido->cliente->nome}}" separator>
         <x-slot:actions>
-            @if($itensPedido->count()>0 && $pedido->status_pedido_id == 1)
-            <x-button wire:click="alterar_status_pedido" label="{{ $pedido->status_pedido_id == 1 ? 'Fechar pedido' : 'Pedido fechado' }}" icon="{{ $pedido->status_pedido_id == 1 ? 'o-lock-open' : 'o-lock-closed' }}" class="btn + {{ $pedido->status_pedido_id == 1 ? 'btn-outline btn-primary' : 'bg-primary text-white'}}" />
+            @if($itensPedido->count()>0 && $pedido->isAberto())
+            <x-button wire:click="alterar_status_pedido" label="{{ $pedido->isAberto() ? 'Fechar pedido' : 'Pedido fechado' }}" icon="{{ $pedido->isAberto() ? 'o-lock-open' : 'o-lock-closed' }}" class="btn + {{ $pedido->isAberto() ? 'btn-outline btn-primary' : 'bg-primary text-white'}}" />
             @endif
 
-            @if($pedido->status_pedido_id == 1)
+            @if($pedido->isAberto())
             <x-button icon="o-plus" class="btn-primary" @click="$wire.myModal = true" />
             @endif
         </x-slot:actions>
@@ -18,7 +18,7 @@
     <br>
     <div class="lg:flex justify-end gap-3">
         <x-card>
-            @if($pedido->status_pedido_id == 1)
+            @if($pedido->isAberto())
             <x-input label=Desconto wire:model="valor_desconto" thousands-separator="." fraction-separator="," money />
             @else
             <x-input label=Desconto wire:model="valor_desconto" thousands-separator="." fraction-separator="," money readonly />
@@ -40,7 +40,7 @@
     <br>
     <div>
         <x-card>
-            @if($pedido->status_pedido_id == 1)
+            @if($pedido->isAberto())
             <x-input label="Observação" wire:model="observacao" />
             @else
             <x-input label="Observação" wire:model="observacao" readonly />

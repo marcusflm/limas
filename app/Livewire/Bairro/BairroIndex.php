@@ -3,11 +3,10 @@
 namespace App\Livewire\Bairro;
 
 use App\Models\Bairro;
-use App\Models\Cliente;
 use App\Traits\Navegavel;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Attributes\Reactive;
+use Livewire\Attributes\On;
 
 class BairroIndex extends Component
 {
@@ -16,9 +15,15 @@ class BairroIndex extends Component
 
     public Bairro $bairro;
 
+    public bool $myModal = false;
+
     public string $termo = '';
 
-    public bool $myModal = false;
+    #[On('bairro-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
 
     public function edit(Bairro $bairro)
     {
@@ -53,6 +58,9 @@ class BairroIndex extends Component
 
         $bairros = Bairro::where('nome', 'like', "%{$this->termo}%")->get();
 
-        return view('livewire.bairro.index', ['bairros' => $bairros, 'headers' => $headers]);
+        return view('livewire.bairro.index')->with([
+            'bairros' => $bairros,
+            'headers' => $headers
+        ]);
     }
 }
