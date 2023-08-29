@@ -20,6 +20,7 @@ class CategoriaCreate extends Component
     {
         Categoria::create($this->validate());
         $this->alert('success', 'Categoria criada com sucesso!');
+        unset($this->nome);
         $this->dispatch('categoria-edicao-concluida');
     }
 
