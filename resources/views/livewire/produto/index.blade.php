@@ -20,6 +20,8 @@
         </x-table>
     </x-card>
     @else
-    <x-alert icon="o-user" title="Nenhum produto encontrado" />
+    <x-card>
+        <x-alert icon="o-face-frown" title="Nenhum produto encontrado" />
+    </x-card>
     @endif
 </div>

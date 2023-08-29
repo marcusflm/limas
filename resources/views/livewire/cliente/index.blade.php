@@ -21,6 +21,8 @@
         </x-table>
     </x-card>
     @else
-    <x-alert icon="o-user" title="Nenhum cliente encontrado" />
+    <x-card>
+        <x-alert icon="o-face-frown" title="Nenhum cliente encontrado" />
+    </x-card>
     @endif
 </div>
