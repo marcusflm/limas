@@ -100,8 +100,8 @@ class DatabaseSeeder extends Seeder
 
         User::insert(
             [
-                'name' => 'Marcus',
-                'email' => 'marcus@gmail.com',
+                'nome' => 'Nome Teste',
+                'email' => 'teste@teste.com',
                 'password' => Hash::make('12345')
             ]
         );

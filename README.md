@@ -16,3 +16,9 @@ yarn dev
 ```
 
 - **Aplicação:** Veja em http://localhost:8017
+
+```bash
+Usuário: teste@teste.com
+
+Senha: 12345
+```
