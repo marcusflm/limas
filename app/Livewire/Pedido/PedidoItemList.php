@@ -7,6 +7,7 @@ use App\Models\Pedido;
 use App\Models\Produto;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -26,6 +27,12 @@ class PedidoItemList extends Component
 
     public bool $myModal = false;
 
+    #[On('pedido-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
+
     public function edit(ItensPedido $item)
     {
         $this->item = $item;
@@ -34,11 +41,6 @@ class PedidoItemList extends Component
 
     public function delete(ItensPedido $item)
     {
-        if ($this->pedido->status_pedido_id != 1) {
-            $this->alert('error', 'Pedido está fechado!');
-            return;
-        }
-
         try {
             DB::beginTransaction();
 

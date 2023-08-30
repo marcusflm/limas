@@ -5,6 +5,7 @@ namespace App\Livewire\Produto;
 use App\Models\Produto;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ProdutoIndex extends Component
@@ -18,6 +19,12 @@ class ProdutoIndex extends Component
 
     public bool $myModal = false;
 
+    #[On('produto-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
+
     public function create()
     {
         unset($this->produto);
@@ -28,12 +35,11 @@ class ProdutoIndex extends Component
     {
         if ($produto->itens()->count()) {
             $this->alert('error', 'Produto está sendo usado!');
-        } else {
-            $produto->delete();
-            $this->alert('success', 'Produto apagado!');
+            return;
         }
-        // $this->authorize('delete', $post);
 
+        $produto->delete();
+        $this->alert('success', 'Produto apagado!');
     }
 
     public function render()

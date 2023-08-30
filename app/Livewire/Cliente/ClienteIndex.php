@@ -5,6 +5,7 @@ namespace App\Livewire\Cliente;
 use App\Models\Cliente;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ClienteIndex extends Component
@@ -15,6 +16,12 @@ class ClienteIndex extends Component
     public string $termo = '';
 
     public bool $myModal = false;
+
+    #[On('cliente-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
 
     public function create()
     {

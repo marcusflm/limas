@@ -16,6 +16,8 @@ class ClienteEdit extends Component
 
     public Cliente $cliente;
 
+    public $bairros;
+
     #[Rule('required')]
     public $nome;
 
@@ -28,14 +30,21 @@ class ClienteEdit extends Component
     #[Rule('required')]
     public $bairro_id;
 
-    public bool $myModal = false;
-
-    function mount()
+    function boot()
     {
         $this->nome = $this->cliente->nome;
         $this->telefone = $this->cliente->telefone;
         $this->email = $this->cliente->email;
         $this->bairro_id = $this->cliente->bairro_id;
+        $this->search();
+    }
+
+    public function search(string $value = '')
+    {
+        $this->bairros = Bairro::query()
+            ->where('nome', 'like', "%{$value}%")
+            ->take(5)
+            ->get();
     }
 
     public function save()
@@ -43,14 +52,12 @@ class ClienteEdit extends Component
         $this->telefone = preg_replace("/[^0-9]/", "", $this->telefone);
 
         if (strlen($this->telefone) > 11) {
-            $this->telefone = substr($this->telefone, 1, 11);
+            $this->telefone = substr($this->telefone, 0, 11);
         }
 
-        if ($this->cliente->update($this->validate())) {
-            $this->flash('success', 'Cliente alterado com sucesso!', [], "/clientes/{$this->cliente->id}");
-        } else {
-            $this->flash('error', 'Cliente não foi alterado!');
-        }
+        $this->cliente->fresh()->update($this->validate());
+        $this->alert('success', 'Cliente alterado com sucesso!');
+        $this->dispatch('cliente-edicao-concluida');
     }
 
     public function render()

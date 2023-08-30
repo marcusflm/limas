@@ -15,16 +15,20 @@
             {{ $pedido->data_pedido->format('d/m/Y') }}
             @endscope
 
+            @scope('cell_status_pagamento.nome', $pedido)
+            <x-badge :value="$pedido->status_pagamento->nome" class="{{ $pedido->status_pagamento->badge }}" />
+            @endscope
+
             @scope('cell_valor_total', $pedido)
             {{ number_format($pedido->valor_total, 2, ',', '.') }}
             @endscope
 
             @scope('actions', $pedido)
             <div class="flex gap-3">
-                @if($pedido->status_pedido_id == 2)
-                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm + {{ $pedido->status_pagamento->id == 1 ? 'btn-outline btn-error' : 'bg-success text-white'}}" />
+                @if($pedido->isFechado() && $pedido->isPendente())
+                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm + {{ $pedido->status_pagamento->botao }}" />
                 @endif
-                @if($pedido->status_pedido_id == 1)
+                @if($pedido->isAberto())
                 <x-button icon="o-trash" wire:click="delete({{ $pedido->id }})" class="btn-sm btn-outline btn-error" />
                 @endif
             </div>
