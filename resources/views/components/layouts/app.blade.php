@@ -22,7 +22,7 @@
             </a>
         </x-slot:brand>
         <x-slot:actions>
-            <a href="/logout">Sair <x-icon name="s-arrow-right-on-rectangle" /></a>
+            <a href="/logout"><x-icon name="o-power" class="mr-2 pb-0.5" />Sair</a>
         </x-slot:actions>
     </x-nav>
     @endauth

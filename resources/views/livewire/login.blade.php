@@ -1,9 +1,4 @@
 <div class="mx-auto lg:w-1/3">
-    @if($errors->any())
-    @php
-    dd($errors)
-    @endphp
-    @endif
     <x-card>
         <x-form wire:submit="autenticar">
             <x-input label="E-mail" wire:model="email" placeholder="email@example.com" icon="m-at-symbol" required />

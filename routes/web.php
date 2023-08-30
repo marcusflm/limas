@@ -19,6 +19,9 @@ Route::get('/login', Login::class)->name('login');
 
 Route::get('/logout', function () {
     Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+
     return redirect()->route('login');
 });
 
