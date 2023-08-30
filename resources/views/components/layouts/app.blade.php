@@ -42,6 +42,7 @@
                 <x-menu-item title="Clientes" icon="o-users" link="/clientes" class="text-base" />
                 <x-menu-item title="Bairros" icon="o-home" link="/bairros" class="text-base" />
                 <x-menu-item title="Lotes" icon="o-tag" link="###" class="text-base" />
+                <x-menu-item title="Mercados" icon="o-shopping-cart" link="/mercados" class="text-base" />
             </x-menu>
         </x-slot:sidebar>
         @endauth

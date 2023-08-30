@@ -8,6 +8,7 @@ use App\Livewire\Cliente\ClienteIndex;
 use App\Livewire\Cliente\ClienteShow;
 use App\Livewire\Index;
 use App\Livewire\Login;
+use App\Livewire\Mercado\MercadoIndex;
 use App\Livewire\Pedido\PedidoIndex;
 use App\Livewire\Pedido\PedidoItemCreate;
 use App\Livewire\Pedido\PedidoShow;
@@ -42,4 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/clientes/{cliente}', ClienteShow::class);
 
     Route::get('/bairros', BairroIndex::class);
+
+    Route::get('/mercados', MercadoIndex::class);
 });

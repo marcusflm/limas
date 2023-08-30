@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class lote extends Model
+class Lote extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['quantidade', 'produto_id', 'compra_id'];
 }
