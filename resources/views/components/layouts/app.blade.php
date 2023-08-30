@@ -18,7 +18,9 @@
                 <x-icon name="o-bars-3" class="cursor-pointer" />
             </label>
             <a href="/">
-                LIMA's confeitaria caseira
+                <div class="flex content-center gap-2">
+                    <img src="{{ asset('images/logo3.jpeg') }}" width="70" class="rounded-full lg:absolute lg:ml-20" />
+                </div>
             </a>
         </x-slot:brand>
         <x-slot:actions>
@@ -33,7 +35,7 @@
         {{-- Note `main-drawer` reference here --}}
         @auth
         <x-slot:sidebar class="bg-[#c58a25] text-white strong" drawer="main-drawer">
-            <x-menu>
+            <x-menu class="lg:mt-4">
                 <x-menu-item title="Pedidos" icon="o-plus-circle" link="/pedidos" class="text-base" />
                 <x-menu-item title="Produtos" icon="o-heart" link="/produtos" class="text-base" />
                 <x-menu-item title="Categorias" icon="o-cake" link="/categorias" class="text-base" />

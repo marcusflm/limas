@@ -16,6 +16,7 @@
         </x-card>
     </div>
     <br>
+
     @if($pedidos->count() > 0)
     <x-card>
         <x-table :headers="$headers" :rows="$pedidos" striped @row-click="$wire.navegar('/pedidos/' + $event.detail.id)">

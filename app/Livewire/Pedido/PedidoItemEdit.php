@@ -6,7 +6,7 @@ use App\Models\ItensPedido;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Traits\Navegavel;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Rule;
@@ -25,6 +25,16 @@ class PedidoItemEdit extends Component
     #[Rule('required')]
     public $quantidade = null;
 
+    public $produtos;
+
+    public function search(string $value = '')
+    {
+        $this->produtos = Produto::query()
+            ->where('nome', 'like', "%{$value}%")
+            ->take(5)
+            ->get();
+    }
+
     public function aumentar()
     {
         $this->quantidade++;
@@ -41,6 +51,7 @@ class PedidoItemEdit extends Component
     {
         $this->produto_id = $this->item->produto_id;
         $this->quantidade = $this->item->quantidade;
+        $this->search();
     }
 
     public function save()
@@ -90,6 +101,6 @@ class PedidoItemEdit extends Component
 
     public function render()
     {
-        return view('livewire.pedido.pedido-item-edit', ['produtos' => Produto::all()]);
+        return view('livewire.pedido.pedido-item-edit');
     }
 }
