@@ -4,9 +4,10 @@ namespace App\Livewire\Pedido;
 
 use App\Models\ItensPedido;
 use App\Models\Pedido;
+use App\Models\StatusPedido;
 use App\Traits\Navegavel;
-use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -35,6 +36,13 @@ class PedidoShow extends Component
 
     public bool $myModal = false;
 
+    #[On('pedido-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
+
+
     public function mount()
     {
         $this->valor_desconto = $this->pedido->valor_desconto;
@@ -43,18 +51,19 @@ class PedidoShow extends Component
         $this->valor_itens = $this->pedido->valor_itens;
         $this->observacao = $this->pedido->observacao;
 
-        $this->itensPedido = ItensPedido::where('pedido_id', $this->pedido->id)->get();
+        $this->itensPedido = ItensPedido::with('pedido')->get();
     }
 
     public function alterar_status_pedido()
     {
-        if ($this->pedido->status_pedido_id == 1) {
-            $this->pedido->status_pedido_id = 2;
+        if ($this->pedido->isAberto()) {
+            $this->pedido->status_pedido_id = StatusPedido::FECHADO;
             $this->pedido->valor_desconto = $this->valor_desconto;
             $this->pedido->valor_total = $this->valor_total - $this->valor_desconto;
             $this->pedido->observacao = $this->observacao;
             $this->pedido->save();
-            $this->flash('success', 'Pedido fechado com sucesso!', [], '/pedidos');
+            $this->alert('success', 'Pedido fechado com sucesso!');
+            $this->navegar('/pedidos');
         }
     }
 

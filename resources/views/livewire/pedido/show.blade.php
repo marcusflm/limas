@@ -1,8 +1,8 @@
 <div>
     <x-header title="Pedido {{$pedido->id}}" subtitle="Cliente: {{$pedido->cliente->nome}}" separator>
         <x-slot:actions>
-            @if($itensPedido->count()>0 && $pedido->isAberto())
-            <x-button wire:click="alterar_status_pedido" label="{{ $pedido->isAberto() ? 'Fechar pedido' : 'Pedido fechado' }}" icon="{{ $pedido->isAberto() ? 'o-lock-open' : 'o-lock-closed' }}" class="btn + {{ $pedido->isAberto() ? 'btn-outline btn-primary' : 'bg-primary text-white'}}" />
+            @if($pedido->itensPedido()->count()>0 && $pedido->isAberto())
+            <x-button wire:click="alterar_status_pedido" label="{{ $pedido->isAberto() ? 'Fechar pedido' : 'Pedido fechado' }}" icon="{{ $pedido->status_pedido->icone }}" class="btn + {{ $pedido->status_pedido->botao }}" />
             @endif
 
             @if($pedido->isAberto())
@@ -10,10 +10,13 @@
             @endif
         </x-slot:actions>
     </x-header>
+
     <x-modal wire:model="myModal" title="Novo item">
         <livewire:pedido.pedido-item-create :$pedido />
     </x-modal>
-    @if($itensPedido->count()>0)
+
+    @if($pedido->itensPedido()->count()>0)
+
     <livewire:pedido.pedido-item-list :$pedido />
     <br>
     <div class="lg:flex justify-end gap-3">

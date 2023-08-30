@@ -25,7 +25,7 @@
             </x-card>
         </div>
         <div>
-            <x-card title="Valor total">
+            <x-card title="Valor total vendas">
                 R$ {{ number_format($valor_total_unidades_vendidas, 2, ',', '.') }}
             </x-card>
         </div>

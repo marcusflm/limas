@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class StatusPagamento extends Model
 {
     use HasFactory;
+
+    public const PENDENTE = 1;
+    public const PAGO = 2;
 }

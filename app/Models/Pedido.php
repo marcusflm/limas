@@ -41,4 +41,19 @@ class Pedido extends Model
     {
         return $this->status_pedido_id == StatusPedido::ABERTO;
     }
+
+    function isFechado(): bool
+    {
+        return $this->status_pedido_id == StatusPedido::FECHADO;
+    }
+
+    function isPendente(): bool
+    {
+        return $this->status_pagamento_id == StatusPagamento::PENDENTE;
+    }
+
+    function isPago(): bool
+    {
+        return $this->status_pagamento_id == StatusPagamento::PAGO;
+    }
 }

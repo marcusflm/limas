@@ -70,7 +70,8 @@ class PedidoItemCreate extends Component
 
             DB::commit();
 
-            $this->flash('success', 'Item adicionado!', [], "/pedidos/{$this->pedido->id}");
+            $this->alert('success', 'Item adicionado!');
+            $this->navegar("/pedidos/{$this->pedido->id}");
         } catch (\Throwable $th) {
             DB::rollBack();
             $this->alert('error', 'Item não foi adicionado!');

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('status_pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome', 50);
+            $table->string('botao', 100);
+            $table->string('icone', 100);
             $table->timestamps();
         });
     }

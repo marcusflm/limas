@@ -23,19 +23,28 @@ class DatabaseSeeder extends Seeder
     {
         StatusPedido::insert([
             [
-                'nome' => 'Aberto'
+                'nome' => 'Aberto',
+                'botao' => 'btn-outline btn-primary',
+                'icone' => 'o-lock-open'
             ],
             [
-                'nome' => 'Fechado'
+                'nome' => 'Fechado',
+                'botao' => 'bg-primary text-white',
+                'icone' => 'o-lock-closed'
             ]
         ]);
 
         StatusPagamento::insert([
             [
-                'nome' => 'Pendente'
+                'nome' => 'Pendente',
+                'botao' => 'btn-outline btn-error',
+                'badge' => 'badge-error'
+
             ],
             [
-                'nome' => 'Pago'
+                'nome' => 'Pago',
+                'botao' => 'bg-success text-white',
+                'badge' => 'badge-success'
             ]
         ]);
 

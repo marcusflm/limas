@@ -3,8 +3,10 @@
 namespace App\Livewire\Pedido;
 
 use App\Models\Pedido;
+use App\Models\StatusPagamento;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class PedidoIndex extends Component
@@ -16,14 +18,15 @@ class PedidoIndex extends Component
 
     public bool $myModal = false;
 
-    public function create()
+    #[On('pedido-edicao-concluida')]
+    function fechaModal(): void
     {
-        $this->myModal = true;
+        $this->myModal = false;
     }
 
     public function delete(Pedido $pedido)
     {
-        if ($pedido->status_pedido_id != 1) {
+        if ($pedido->isFechado()) {
             $this->alert('error', 'Pedido está fechado!');
             return;
         }
@@ -34,14 +37,12 @@ class PedidoIndex extends Component
 
     public function altera_status_pagamento(Pedido $pedido)
     {
-        if ($pedido->status_pagamento_id == 1) {
-            $pedido->status_pagamento_id = 2;
-        } else {
-            $pedido->status_pagamento_id = 1;
+        if ($pedido->isPendente()) {
+            $pedido->status_pagamento_id = StatusPagamento::PAGO;
+            $pedido->save();
+            $this->navegar('/pedidos');
         }
-        $pedido->save();
     }
-
 
     public function render()
     {

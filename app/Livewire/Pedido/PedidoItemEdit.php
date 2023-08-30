@@ -62,7 +62,6 @@ class PedidoItemEdit extends Component
         $pedido = Pedido::where('id', $this->item->pedido_id)->first();
 
         try {
-
             DB::beginTransaction();
 
             $this->item->produto_id = $this->produto_id;
@@ -81,7 +80,8 @@ class PedidoItemEdit extends Component
             $pedido->save();
 
             DB::commit();
-            $this->flash('success', 'Item alterado com sucesso!', [], "/pedidos/{$this->item->pedido_id}");
+
+            $this->navegar("/pedidos/{$this->item->pedido_id}");
         } catch (\Throwable $th) {
             DB::rollBack();
             $this->flash('error', 'Item não foi alterado!', [], "/pedidos/{$this->item->pedido_id}");
