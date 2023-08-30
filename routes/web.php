@@ -6,8 +6,11 @@ use App\Livewire\Bairro\BairroIndex;
 use App\Livewire\Categoria\CategoriaIndex;
 use App\Livewire\Cliente\ClienteIndex;
 use App\Livewire\Cliente\ClienteShow;
+use App\Livewire\Compra\CompraIndex;
 use App\Livewire\Index;
+use App\Livewire\Ingrediente\IngredienteIndex;
 use App\Livewire\Login;
+use App\Livewire\Lote\LoteIndex;
 use App\Livewire\Mercado\MercadoIndex;
 use App\Livewire\Pedido\PedidoIndex;
 use App\Livewire\Pedido\PedidoItemCreate;
@@ -44,5 +47,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/bairros', BairroIndex::class);
 
+    Route::get('/compras', CompraIndex::class);
     Route::get('/mercados', MercadoIndex::class);
+    Route::get('/ingredientes', IngredienteIndex::class);
+    Route::get('/lotes', LoteIndex::class);
 });
