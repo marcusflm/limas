@@ -14,7 +14,7 @@
             {{ number_format($item->valor_total, 2, ',', '.') }}
             @endscope
 
-            @if($pedido->status_pedido_id == 1)
+            @if($pedido->isAberto())
             @scope('actions', $item)
             <x-button icon="o-trash" wire:click="delete({{ $item->id }})" class="text-red-500 btn-sm" />
             @endscope

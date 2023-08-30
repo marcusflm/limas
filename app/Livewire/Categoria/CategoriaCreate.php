@@ -18,11 +18,10 @@ class CategoriaCreate extends Component
 
     public function save()
     {
-        if (Categoria::create($this->validate())) {
-            $this->flash('success', 'Categoria criada com sucesso!', [], '/categorias');
-        } else {
-            $this->flash('error', 'Categoria não foi criada!');
-        }
+        Categoria::create($this->validate());
+        $this->alert('success', 'Categoria criada com sucesso!');
+        unset($this->nome);
+        $this->dispatch('categoria-edicao-concluida');
     }
 
     public function render()

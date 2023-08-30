@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Produto;
 
-use App\Models\Categoria;
 use App\Models\ItensPedido;
 use App\Models\Produto;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -34,6 +34,12 @@ class ProdutoShow extends Component
 
     public bool $myModal = false;
 
+    #[On('produto-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
+
     function mount()
     {
         $this->nome = $this->produto->nome;
@@ -54,21 +60,8 @@ class ProdutoShow extends Component
         }
     }
 
-    public function save()
-    {
-        if ($this->produto->update($this->validate())) {
-            $this->flash('success', 'Produto alterado com sucesso!', [], '/produtos');
-        } else {
-            $this->flash('error', 'Produto não foi alterado!');
-        }
-
-        // return $this->redirect('/produtos', navigate: true);
-    }
-
     public function render()
     {
-        return view('livewire.produto.show', [
-            'categorias' => Categoria::all()
-        ]);
+        return view('livewire.produto.show');
     }
 }

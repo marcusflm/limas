@@ -26,6 +26,8 @@
         </x-table>
     </x-card>
     @else
-    <x-alert icon="o-user" title="Nenhum bairro encontrado" />
+    <x-card>
+        <x-alert icon="o-face-frown" title="Nenhum bairro encontrado" />
+    </x-card>
     @endif
 </div>

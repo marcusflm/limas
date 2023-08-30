@@ -12,7 +12,7 @@
             </div>
         </div>
         <x-slot:actions>
-            <x-button label="Fechar" wire:click="$parent.myModal = false" />
+            <x-button label="Fechar" wire:click="$dispatch('pedido-edicao-concluida')" />
             <x-button label="Adicionar" class="btn-primary" type="submit" spinner="save" />
         </x-slot:actions>
     </x-form>

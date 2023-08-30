@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Produto;
 
-use App\Models\Categoria;
 use App\Models\Produto;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -37,19 +36,13 @@ class ProdutoEdit extends Component
 
     public function save()
     {
-        if ($this->produto->update($this->validate())) {
-            $this->flash('success', 'Produto alterado com sucesso!', [], '/produtos');
-        } else {
-            $this->flash('error', 'Produto não foi alterado!');
-        }
-
-        // return $this->redirect('/produtos', navigate: true);
+        $this->produto->fresh()->update($this->validate());
+        $this->alert('success', 'Produto alterado com sucesso!');
+        $this->dispatch('produto-edicao-concluida');
     }
 
     public function render()
     {
-        return view('livewire.produto.edit', [
-            'categorias' => Categoria::all()
-        ]);
+        return view('livewire.produto.edit');
     }
 }

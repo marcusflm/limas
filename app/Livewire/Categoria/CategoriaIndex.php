@@ -5,6 +5,7 @@ namespace App\Livewire\Categoria;
 use App\Models\Categoria;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class CategoriaIndex extends Component
@@ -15,6 +16,12 @@ class CategoriaIndex extends Component
     public Categoria $categoria;
 
     public bool $myModal = false;
+
+    #[On('categoria-edicao-concluida')]
+    function fechaModal(): void
+    {
+        $this->myModal = false;
+    }
 
     public function edit(Categoria $categoria)
     {
@@ -46,6 +53,10 @@ class CategoriaIndex extends Component
             ['key' => 'nome', 'label' => 'Nome'],
         ];
 
-        return view('livewire.categoria.index', ['headers' => $headers, 'categorias' => Categoria::all()]);
+
+        return view('livewire.categoria.index')->with([
+            'headers' => $headers,
+            'categorias' => Categoria::all()
+        ]);
     }
 }
