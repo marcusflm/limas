@@ -48,7 +48,11 @@ class PedidoItemList extends Component
             $item->delete();
 
             $this->pedido->valor_itens = $this->pedido->valor_itens - $valor_total_itens;
-            $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
+            if ($this->pedido->itensPedido()->count() > 0) {
+                $this->pedido->valor_total = $this->pedido->valor_total - $valor_total_itens;
+            } else {
+                $this->pedido->valor_total = 0;
+            }
             $this->pedido->save();
 
             DB::commit();

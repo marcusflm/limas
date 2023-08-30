@@ -65,7 +65,7 @@ class PedidoItemCreate extends Component
             ]);
 
             $this->pedido->valor_itens = $this->pedido->valor_itens + $valor_total;
-            $this->pedido->valor_total = $this->pedido->valor_total + $valor_total;
+            $this->pedido->valor_total = $this->pedido->valor_total + $this->pedido->valor_frete + $valor_total;
             $this->pedido->save();
 
             DB::commit();

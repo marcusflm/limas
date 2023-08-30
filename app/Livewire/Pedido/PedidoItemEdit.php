@@ -70,12 +70,12 @@ class PedidoItemEdit extends Component
             $this->item->update();
 
             $itensPedido = $pedido->itensPedido()->get();
-            $valor_total = 0;
+            $valor_total_itens = 0;
             foreach ($itensPedido as $itemPedido) {
-                $valor_total = $valor_total + $itemPedido->valor_total;
+                $valor_total_itens = $valor_total_itens + $itemPedido->valor_total;
             }
 
-            $pedido->valor_itens = $valor_total;
+            $pedido->valor_itens = $valor_total_itens;
             $pedido->valor_total = $pedido->valor_itens + $pedido->valor_frete;
             $pedido->save();
 
