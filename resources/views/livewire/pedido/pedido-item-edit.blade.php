@@ -1,5 +1,5 @@
 <x-form wire:submit="save">
-    <x-select label="Produto" wire:model="produto_id" placeholder="Selecione.." :options="$produtos" option-value="id" option-label="nome" />
+    <x-choices label="Produto" wire:model="produto_id" :options="$produtos" option-label="nome" icon="o-magnifying-glass" placeholder="Selecione.." single searchable />
     <div class="mx-auto">
         <label for="quantidade" class="label mx-auto">
             <span class="label-text"><strong>Quantidade</strong></span>

@@ -57,7 +57,7 @@ class PedidoCreate extends Component
             'cliente_id' => $this->cliente_id,
             'data_pedido' => now(),
             'valor_frete' => $valor_frete,
-            'valor_total' => $valor_frete
+            'valor_total' => 0
         ]);
 
         return redirect()->to("pedidos/{$pedido->id}");

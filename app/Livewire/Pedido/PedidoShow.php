@@ -59,7 +59,7 @@ class PedidoShow extends Component
         if ($this->pedido->isAberto()) {
             $this->pedido->status_pedido_id = StatusPedido::FECHADO;
             $this->pedido->valor_desconto = $this->valor_desconto;
-            $this->pedido->valor_total = $this->valor_total - $this->valor_desconto;
+            $this->pedido->valor_total = $this->valor_itens + $this->valor_frete - $this->valor_desconto;
             $this->pedido->observacao = $this->observacao;
             $this->pedido->save();
             $this->alert('success', 'Pedido fechado com sucesso!');

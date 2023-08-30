@@ -4,12 +4,14 @@ namespace App\Livewire\Cliente;
 
 use App\Models\Cliente;
 use App\Models\Pedido;
+use App\Traits\Navegavel;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class ClienteShow extends Component
 {
+    use Navegavel;
     public Cliente $cliente;
 
     public $pedidos;
@@ -40,7 +42,7 @@ class ClienteShow extends Component
         $this->telefone = $this->cliente->telefone;
         $this->email = $this->cliente->email;
         $this->bairro_id = $this->cliente->bairro_id;
-        $this->pedidos = Pedido::with('cliente')->get();
+        $this->pedidos = Pedido::where('cliente_id', $this->cliente->id)->get();
     }
 
     public function render()

@@ -1,19 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-      // You will probably also need those lines
-      "./resources/**/**/*.blade.php",
-      "./resources/**/**/*.js",
-      "./app/View/Components/**/**/*.php",
-      "./app/Livewire/**/**/*.php",                     
+    // You will probably also need those lines
+    "./resources/**/**/*.blade.php",
+    "./resources/**/**/*.js",
+    "./app/View/Components/**/**/*.php",
+    "./app/Livewire/**/**/*.php",
 
-      // Add mary
-      "./vendor/robsontenorio/mary/src/View/Components/**/*.php" 
+    // Add mary
+    "./vendor/robsontenorio/mary/src/View/Components/**/*.php"
+  ],
+  safelist: [
+    'badge-success',
+    'bagde-error',
   ],
   theme: {
-      extend: {},
+    extend: {},
   },
-  
+
   // Add daisyUI
-  plugins: [require("daisyui")] 
+  plugins: [require("daisyui")]
 }

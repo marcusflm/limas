@@ -23,6 +23,21 @@ class PedidoItemCreate extends Component
 
     public $quantidade = 1;
 
+    public $produtos;
+
+    public function mount()
+    {
+        $this->search();
+    }
+
+    public function search(string $value = '')
+    {
+        $this->produtos = Produto::query()
+            ->where('nome', 'like', "%{$value}%")
+            ->take(5)
+            ->get();
+    }
+
     public function aumentar()
     {
         $this->quantidade++;
@@ -65,7 +80,7 @@ class PedidoItemCreate extends Component
             ]);
 
             $this->pedido->valor_itens = $this->pedido->valor_itens + $valor_total;
-            $this->pedido->valor_total = $this->pedido->valor_total + $valor_total;
+            $this->pedido->valor_total = $this->pedido->valor_total + $this->pedido->valor_frete + $valor_total;
             $this->pedido->save();
 
             DB::commit();
@@ -80,11 +95,6 @@ class PedidoItemCreate extends Component
 
     public function render()
     {
-        return view(
-            'livewire.pedido.itens.create',
-            [
-                'produtos' => Produto::all()
-            ]
-        );
+        return view('livewire.pedido.itens.create');
     }
 }
