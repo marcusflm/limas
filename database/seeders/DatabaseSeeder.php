@@ -94,15 +94,33 @@ class DatabaseSeeder extends Seeder
 
         Produto::insert([
             [
-                'nome' => 'Chocolate 70%',
-                'valor' => 11,
-                'descricao' => 'Com chocolate nestle',
+                'nome' => 'Tradicional',
+                'valor' => 8,
                 'categoria_id' => 1
             ],
             [
-                'nome' => 'Ninho trufado',
+                'nome' => 'Tradicional granulado',
                 'valor' => 10,
-                'descricao' => 'cremoso',
+                'categoria_id' => 1
+            ],
+            [
+                'nome' => '70%',
+                'valor' => 10,
+                'categoria_id' => 1
+            ],
+            [
+                'nome' => '100%',
+                'valor' => 11,
+                'categoria_id' => 1
+            ],
+            [
+                'nome' => 'Oreo com ninho',
+                'valor' => 10,
+                'categoria_id' => 1
+            ],
+            [
+                'nome' => 'Oreo com ninho (Biscoito por fora)',
+                'valor' => 10,
                 'categoria_id' => 1
             ]
         ]);
