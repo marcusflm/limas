@@ -53,9 +53,11 @@ class IngredienteIndex extends Component
             ['key' => 'nome', 'label' => 'Nome'],
         ];
 
+        $ingredientes = Ingrediente::where('nome', 'like', "%{$this->termo}%")->get();
+
         return view('livewire.ingrediente.index')->with([
             'headers' => $headers,
-            'ingredientes' => Ingrediente::all()
+            'ingredientes' => $ingredientes
         ]);
     }
 }
