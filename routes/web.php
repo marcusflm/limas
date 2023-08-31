@@ -18,6 +18,8 @@ use App\Livewire\Pedido\PedidoItemCreate;
 use App\Livewire\Pedido\PedidoShow;
 use App\Livewire\Produto\ProdutoIndex;
 use App\Livewire\Produto\ProdutoShow;
+use App\Livewire\Receita\ReceitaIndex;
+use App\Livewire\Receita\ReceitaShow;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/login', Login::class)->name('login');
@@ -48,10 +50,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/bairros', BairroIndex::class);
 
+    Route::get('/lotes', LoteIndex::class);
+
     Route::get('/compras', CompraIndex::class);
     Route::get('/compras/{compra}', CompraShow::class);
 
-    Route::get('/mercados', MercadoIndex::class);
+    Route::get('/receitas', ReceitaIndex::class);
+    Route::get('/receitas/{receita}', ReceitaShow::class);
+
     Route::get('/ingredientes', IngredienteIndex::class);
-    Route::get('/lotes', LoteIndex::class);
+    Route::get('/mercados', MercadoIndex::class);
 });

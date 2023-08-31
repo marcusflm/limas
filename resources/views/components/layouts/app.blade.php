@@ -41,10 +41,11 @@
                 <x-menu-item title="Categorias" icon="o-cake" link="/categorias" class="text-base" />
                 <x-menu-item title="Clientes" icon="o-users" link="/clientes" class="text-base" />
                 <x-menu-item title="Bairros" icon="o-home" link="/bairros" class="text-base" />
-                <x-menu-item title="Compras" icon="o-shopping-bag" link="/compras" class="text-base" />
-                <x-menu-item title="Mercados" icon="o-shopping-cart" link="/mercados" class="text-base" />
-                <x-menu-item title="Ingredientes" icon="o-beaker" link="/ingredientes" class="text-base" />
                 <x-menu-item title="Lotes" icon="o-tag" link="/lotes" class="text-base" />
+                <x-menu-item title="Compras" icon="o-shopping-bag" link="/compras" class="text-base" />
+                <x-menu-item title="Receitas" icon="o-book-open" link="/receitas" class="text-base" />
+                <x-menu-item title="Ingredientes" icon="o-beaker" link="/ingredientes" class="text-base" />
+                <x-menu-item title="Mercados" icon="o-shopping-cart" link="/mercados" class="text-base" />
             </x-menu>
         </x-slot:sidebar>
         @endauth

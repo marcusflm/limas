@@ -24,7 +24,7 @@ class CompraIndex extends Component
     public function delete(Compra $compra)
     {
         $compra->delete();
-        $this->alert('success', 'compra apagado!');
+        $this->alert('success', 'Compra apagada!');
     }
 
     public function render()

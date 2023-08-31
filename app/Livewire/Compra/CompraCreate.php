@@ -4,7 +4,6 @@ namespace App\Livewire\Compra;
 
 use App\Models\Compra;
 use App\Models\Mercado;
-use Illuminate\Support\Facades\Date;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -12,8 +11,8 @@ class CompraCreate extends Component
 {
     public Compra $compra;
 
-    #[Rule('required')]
-    public Date $data_compra;
+    #[Rule('required|date')]
+    public $data_compra;
 
     #[Rule('required')]
     public $mercado_id = null;
