@@ -1,5 +1,5 @@
 <div>
-    <x-header title="Receita lote de {{$receita->produto_id}}" subtitle="Lote de 15 unidades" separator>
+    <x-header title="Receita lote de {{$receita->produto->nome}}" subtitle="Lote de 15 unidades" separator>
         <x-slot:actions>
             <x-button icon="o-plus" class="btn-primary" @click="$wire.myModal = true" />
         </x-slot:actions>
@@ -32,7 +32,7 @@
     </div>
     @else
     <x-card>
-        <x-alert icon="o-shopping-cart" title="receita vazia!" />
+        <x-alert icon="o-shopping-cart" title="Receita vazia!" />
     </x-card>
     @endif
 </div>

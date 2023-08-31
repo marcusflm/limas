@@ -18,7 +18,8 @@ class IngredienteCreate extends Component
     {
         Ingrediente::create($this->validate());
         $this->alert('success', 'Ingrediente criado com sucesso!');
-        $this->dispatch('ingrediente-edicao-concluida');
+        // $this->dispatch('ingrediente-edicao-concluida');
+        return redirect()->to('/ingredientes');
     }
 
     public function render()

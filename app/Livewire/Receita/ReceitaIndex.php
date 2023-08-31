@@ -28,11 +28,11 @@ class ReceitaIndex extends Component
     }
     public function render()
     {
-        $receitas = Receita::with('produtos')->get();
+        $receitas = Receita::with('produto')->get();
 
         $headers = [
             ['key' => 'id', 'label' => '#'],
-            ['key' => 'produto.nome', 'label' => 'Data compra']
+            ['key' => 'produto.nome', 'label' => 'Produto']
         ];
 
         return view('livewire.receita.index')->with([

@@ -14,7 +14,7 @@
     </x-card>
     @else
     <x-card>
-        <x-alert icon="o-user" title="Não foram encontradas receitas" />
+        <x-alert icon="o-book-open" title="Nenhuma receita encontrada!" />
     </x-card>
     @endif
 </div>
