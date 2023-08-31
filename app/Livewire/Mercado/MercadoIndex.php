@@ -55,7 +55,6 @@ class MercadoIndex extends Component
 
         $mercados = Mercado::where('nome', 'like', "%{$this->termo}%")->get();
 
-
         return view('livewire.mercado.index')->with([
             'headers' => $headers,
             'mercados' => $mercados
