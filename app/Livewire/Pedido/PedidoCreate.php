@@ -21,6 +21,9 @@ class PedidoCreate extends Component
     #[Rule('required')]
     public $cliente_id = null;
 
+    #[Rule('required|date')]
+    public $data_pedido = null;
+
     public Collection $clientes;
 
     public function mount()
@@ -55,7 +58,7 @@ class PedidoCreate extends Component
 
         $pedido = Pedido::create([
             'cliente_id' => $this->cliente_id,
-            'data_pedido' => now(),
+            'data_pedido' => $this->data_pedido,
             'valor_frete' => $valor_frete,
             'valor_total' => 0
         ]);
