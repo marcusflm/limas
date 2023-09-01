@@ -56,7 +56,6 @@ class ReceitaShow extends Component
             ['key' => 'id', 'label' => '#'],
             ['key' => 'ingrediente.nome', 'label' => 'Ingrediente'],
             ['key' => 'quantidade', 'label' => 'Quantidade'],
-            ['key' => 'valor_unitario', 'label' => 'Valor unitário'],
         ];
 
         return view('livewire.receita.show')->with([

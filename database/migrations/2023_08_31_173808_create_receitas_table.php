@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('receitas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('produto_id')->unsigned();
+            $table->text('observacao')->nullable();
             $table->timestamps();
 
             $table->foreign("produto_id")->references('id')->on('produtos')->onDelete('cascade');
