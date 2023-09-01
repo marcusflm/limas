@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->decimal('valor_unitario', 10, 2)->default(0);
             $table->integer('quantidade');
+            $table->decimal('peso', 10, 2)->default(0);
             $table->integer('ingrediente_id')->unsigned();
             $table->integer('compra_id')->unsigned();
 

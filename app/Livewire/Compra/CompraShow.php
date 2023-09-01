@@ -80,6 +80,7 @@ class CompraShow extends Component
             ['key' => 'id', 'label' => '#'],
             ['key' => 'ingrediente.nome', 'label' => 'Ingrediente'],
             ['key' => 'quantidade', 'label' => 'Quantidade'],
+            ['key' => 'peso', 'label' => 'Peso (g/ml)'],
             ['key' => 'valor_unitario', 'label' => 'Valor unitário'],
         ];
 

@@ -55,7 +55,7 @@ class ReceitaShow extends Component
         $headers = [
             ['key' => 'id', 'label' => '#'],
             ['key' => 'ingrediente.nome', 'label' => 'Ingrediente'],
-            ['key' => 'quantidade', 'label' => 'Quantidade'],
+            ['key' => 'quantidade', 'label' => 'Quantidade (g/ml)'],
         ];
 
         return view('livewire.receita.show')->with([

@@ -10,7 +10,7 @@ class ItensCompra extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['ingrediente_id', 'valor_unitario', 'quantidade', 'compra_id'];
+    protected $fillable = ['ingrediente_id', 'valor_unitario', 'quantidade', 'compra_id', 'peso'];
 
     public function compra(): BelongsTo
     {

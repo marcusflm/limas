@@ -3,6 +3,9 @@
     <div class="lg:w-1/2">
         <x-input label="Valor unitário" wire:model="valor_unitario" prefix="R$" thousands-separator="." fraction-separator="," money />
     </div>
+    <div class="lg:w-1/2">
+        <x-input label="Peso" wire:model="peso" thousands-separator="." fraction-separator="," />
+    </div>
     <div class="mx-auto">
         <label for="quantidade" class="label mx-auto">
             <span class="label-text"><strong>Quantidade</strong></span>

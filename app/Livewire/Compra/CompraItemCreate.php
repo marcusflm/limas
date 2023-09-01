@@ -22,7 +22,10 @@ class CompraItemCreate extends Component
     public $ingrediente_id = null;
 
     #[Rule('required')]
-    public $valor_unitario = 0;
+    public $valor_unitario;
+
+    #[Rule('required')]
+    public $peso;
 
     public $quantidade = 1;
 
@@ -75,6 +78,7 @@ class CompraItemCreate extends Component
                 'ingrediente_id' => $this->ingrediente_id,
                 'valor_unitario' => $this->valor_unitario,
                 'quantidade' => $this->quantidade,
+                'peso' => $this->peso,
                 'valor_total' => $this->valor_unitario * $this->quantidade
             ]);
 

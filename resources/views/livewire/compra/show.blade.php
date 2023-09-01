@@ -17,6 +17,10 @@
             {{ number_format($item->valor_unitario, 2, ',', '.') }}
             @endscope
 
+            @scope('cell_peso', $item)
+            {{ number_format($item->peso, 2, ',', '.') }}
+            @endscope
+
             @scope('cell_valor_total', $item)
             {{ number_format($item->valor_total, 2, ',', '.') }}
             @endscope
@@ -43,7 +47,7 @@
         </x-card>
         <br>
         <x-card>
-            <x-input label="Total do compra" wire:model="valor_total" thousands-separator="." fraction-separator="," money readonly />
+            <x-input label="Total da compra" wire:model="valor_total" thousands-separator="." fraction-separator="," money readonly />
         </x-card>
     </div>
 
