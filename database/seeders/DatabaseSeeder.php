@@ -216,7 +216,7 @@ class DatabaseSeeder extends Seeder
                 'ingrediente_id' => 4,
                 'valor_unitario' => 5.2,
                 'peso' => 200,
-                'quantidade' => 4
+                'quantidade' => 1
             ]
         ]);
 
