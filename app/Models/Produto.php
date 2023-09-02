@@ -22,4 +22,9 @@ class Produto extends Model
     {
         return $this->hasMany(ItensPedido::class);
     }
+
+    public function receita(): BelongsTo
+    {
+        return $this->belongsTo(Receita::class);
+    }
 }

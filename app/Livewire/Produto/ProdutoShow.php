@@ -3,6 +3,7 @@
 namespace App\Livewire\Produto;
 
 use App\Models\ItensPedido;
+use App\Models\Lote;
 use App\Models\Produto;
 use App\Traits\Navegavel;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -32,6 +33,8 @@ class ProdutoShow extends Component
 
     public $valor_total_unidades_vendidas = 0;
 
+    public $lucro_total = 0;
+
     public bool $myModal = false;
 
     #[On('produto-edicao-concluida')]
@@ -53,9 +56,14 @@ class ProdutoShow extends Component
             ->get();
 
         foreach ($itensVendidos as $itemVendido) {
+            $lote = Lote::where('id', $itemVendido->lote_id)->first();
+            $custo_unitario = $lote->custo_unitario;
+
             if ($itemVendido->pedido->status_pedido_id == 2 && $itemVendido->pedido->status_pagamento_id == 2) {
                 $this->total_unidades_vendidas = $this->total_unidades_vendidas + $itemVendido->quantidade;
                 $this->valor_total_unidades_vendidas = $this->valor_total_unidades_vendidas + $itemVendido->valor_total;
+
+                $this->lucro_total = $this->lucro_total + ($itemVendido->valor_unitario - $custo_unitario) * $this->total_unidades_vendidas;
             }
         }
     }

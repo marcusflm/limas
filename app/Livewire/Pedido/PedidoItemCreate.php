@@ -3,6 +3,7 @@
 namespace App\Livewire\Pedido;
 
 use App\Models\ItensPedido;
+use App\Models\Lote;
 use App\Models\Pedido;
 use App\Models\Produto;
 use App\Traits\Navegavel;
@@ -19,21 +20,34 @@ class PedidoItemCreate extends Component
     public Pedido $pedido;
 
     #[Rule('required')]
-    public $produto_id = null;
+    public $produto_id;
+
+    #[Rule('required')]
+    public $lote_id;
 
     public $quantidade = 1;
 
     public $produtos;
+    public $lotes;
 
     public function mount()
     {
         $this->search();
+        $this->search2();
     }
 
     public function search(string $value = '')
     {
         $this->produtos = Produto::query()
             ->where('nome', 'like', "%{$value}%")
+            ->take(5)
+            ->get();
+    }
+
+    public function search2(string $value = '')
+    {
+        $this->lotes = Lote::query()
+            ->where('id', 'like', "%{$value}%")
             ->take(5)
             ->get();
     }
@@ -67,6 +81,7 @@ class PedidoItemCreate extends Component
         $produto = Produto::where('id', $this->produto_id)->first();
         $valor_unitario = $produto->valor;
         $valor_total = $valor_unitario * $this->quantidade;
+        // dd($valor_unitario);
 
         try {
             DB::beginTransaction();
@@ -74,6 +89,7 @@ class PedidoItemCreate extends Component
             ItensPedido::create([
                 'pedido_id' => $this->pedido->id,
                 'produto_id' => $this->produto_id,
+                'lote_id' => $this->lote_id,
                 'valor_unitario' => $valor_unitario,
                 'quantidade' => $this->quantidade,
                 'valor_total' =>  $valor_total

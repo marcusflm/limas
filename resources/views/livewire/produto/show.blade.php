@@ -18,7 +18,7 @@
         </x-card>
     </div>
     <br>
-    <div class="grid grid-cols-2 gap-4 mx-auto lg:w-1/2 flex-row md:w-3/5">
+    <div class="grid grid-cols-3 gap-4 mx-auto lg:w-1/2 flex-row md:w-3/5">
         <div>
             <x-card title="Unidades vendidas">
                 {{$total_unidades_vendidas}}
@@ -27,6 +27,11 @@
         <div>
             <x-card title="Valor total vendas">
                 R$ {{ number_format($valor_total_unidades_vendidas, 2, ',', '.') }}
+            </x-card>
+        </div>
+        <div>
+            <x-card title="Lucro total vendas">
+                R$ {{ number_format($lucro_total, 2, ',', '.') }}
             </x-card>
         </div>
     </div>

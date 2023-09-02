@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('quantidade');
             $table->integer('compra_id')->unsigned();
             $table->integer('produto_id')->unsigned();
+            $table->decimal('custo_unitario', 10, 2);
+            $table->decimal('custo_lote', 10, 2);
 
             $table->timestamps();
 

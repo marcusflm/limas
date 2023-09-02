@@ -8,6 +8,6 @@ class LoteEdit extends Component
 {
     public function render()
     {
-        return view('livewire.lote.lote-edit');
+        return view('livewire.lote.edit');
     }
 }

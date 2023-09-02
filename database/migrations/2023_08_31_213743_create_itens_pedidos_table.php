@@ -18,9 +18,11 @@ return new class extends Migration
             $table->decimal('valor_total', 10, 2);
             $table->integer('produto_id')->unsigned();
             $table->integer('pedido_id')->unsigned();
+            $table->integer('lote_id')->unsigned();
             $table->timestamps();
             $table->foreign("produto_id")->references('id')->on('produtos')->onDelete('cascade');
             $table->foreign("pedido_id")->references('id')->on('pedidos')->onDelete('cascade');
+            $table->foreign("lote_id")->references('id')->on('lotes')->onDelete('cascade');
         });
     }
 

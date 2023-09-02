@@ -16,7 +16,7 @@
             @endscope
 
             @scope('cell_status_pagamento.nome', $pedido)
-            <x-badge :value="$pedido->status_pagamento->nome" class="{{ $pedido->status_pagamento->badge }}" />
+            <x-badge :value="$pedido->status_pagamento->nome" class="{{ $pedido->isPago() ? 'badge-success' : 'badge-error' }}" />
             @endscope
 
             @scope('cell_valor_total', $pedido)
@@ -26,7 +26,7 @@
             @scope('actions', $pedido)
             <div class="flex gap-3">
                 @if($pedido->isFechado() && $pedido->isPendente())
-                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm + {{ $pedido->status_pagamento->botao }}" />
+                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm btn-outline btn-success" />
                 @endif
                 @if($pedido->isAberto())
                 <x-button icon="o-trash" wire:click="delete({{ $pedido->id }})" class="btn-sm btn-outline btn-error" />

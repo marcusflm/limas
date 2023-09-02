@@ -8,6 +8,6 @@ class LoteShow extends Component
 {
     public function render()
     {
-        return view('livewire.lote.lote-show');
+        return view('livewire.lote.show');
     }
 }
