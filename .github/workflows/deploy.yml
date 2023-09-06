@@ -20,4 +20,39 @@ jobs:
         host: ${{ secrets.HOST }} 
         user: ${{ secrets.USER }}
         password: ${{ secrets.PASS }}
-        script: "cd /var/www/app/ && ./.docker/deploy.sh"
+
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '8.0'
+    - uses: actions/checkout@v3
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: composer install --prefer-dist --no-interaction --no-progress --ansi
+    - name: Generate key
+      run: php artisan key:generate
+      env:
+        DB_CONNECTION: pgsql
+        DB_DATABASE: limasdb
+        DB_USERNAME: limasdb
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        APP_URL: http://www.limasconfeitaria.com.br
+        APP_ENV: production
+
+
+    - name: Migrations
+      run: php artisan migrate:fresh --seed --force
+    - name: Cache configs
+      run: php artisan config:cache
+      run: php artisan view:cache
+      run: php artisan route:cache
+    - name: Using Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18.
+    - name: Run install and build
+      run: |
+        yarn install
+        yarn build
+    
