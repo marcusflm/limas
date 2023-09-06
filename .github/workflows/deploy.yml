@@ -20,4 +20,3 @@ jobs:
         host: ${{ secrets.HOST }} 
         user: ${{ secrets.USER }}
         password: ${{ secrets.PASS }}
-        script: "cd /var/www/app/ && ./.docker/deploy.sh"
