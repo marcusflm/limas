@@ -20,7 +20,9 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
-      run: composer install --prefer-dist --no-interaction --no-progress --ansi
+      run: |
+        composer update
+        composer install --prefer-dist --no-interaction --no-progress --ansi
     - name: Generate key
       run: php artisan key:generate
       env:
