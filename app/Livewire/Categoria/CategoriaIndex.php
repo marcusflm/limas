@@ -21,6 +21,7 @@ class CategoriaIndex extends Component
     function fechaModal(): void
     {
         $this->myModal = false;
+        $this->reset('categoria');
     }
 
     public function edit(Categoria $categoria)
@@ -31,7 +32,7 @@ class CategoriaIndex extends Component
 
     public function create()
     {
-        unset($this->categoria);
+        $this->reset('categoria');
         $this->myModal = true;
     }
 
