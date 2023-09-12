@@ -16,7 +16,7 @@ services:
             - 8017:8080
             - 8000:8000
 
-    ######## MYSQL ########
+    ######## POSTGRES ########
     limas-postgres:
         image: postgres:14.3
         environment:

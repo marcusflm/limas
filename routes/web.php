@@ -13,14 +13,11 @@ use App\Livewire\Pedido\PedidoItemCreate;
 use App\Livewire\Pedido\PedidoShow;
 use App\Livewire\Produto\ProdutoIndex;
 use App\Livewire\Produto\ProdutoShow;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/login', Login::class)->name('login');
 
 Route::get('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
+    auth()->logout();
 
     return redirect()->route('login');
 });

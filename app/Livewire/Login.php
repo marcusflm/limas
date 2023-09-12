@@ -17,8 +17,6 @@ class Login extends Component
     public function autenticar()
     {
         if (Auth::attempt($this->validate())) {
-            request()->session()->regenerate();
-
             return $this->redirect('/', navigate: true);
         }
 
