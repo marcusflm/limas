@@ -9,9 +9,9 @@
 </head>
 
 <body class="min-h-screen font-sans antialiased bg-base-200">
-    <x-main collapse-text="Recolher">
+    <x-main>
         @auth
-        <x-slot:sidebar class="bg-[#c58a25] text-white strong" drawer="main-drawer" collapsible>
+        <x-slot:sidebar class="bg-[#c58a25] text-white strong" drawer="main-drawer" collapsible collapse-text="Recolher">
 
             <!-- Hidden when collapsed -->
             <div class="mx-3 my-5">
