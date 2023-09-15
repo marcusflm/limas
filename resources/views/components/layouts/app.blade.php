@@ -14,9 +14,11 @@
         <x-slot:sidebar class="bg-[#c58a25] text-white strong" drawer="main-drawer" collapsible collapse-text="Recolher">
 
             <!-- Hidden when collapsed -->
-            <div class="mx-3 my-5">
-                <img src="{{ asset('images/logo3.jpeg') }}" width="70" class="rounded-full mx-auto" />
-            </div>
+            <a href="/">
+                <div class="mx-3 my-5">
+                    <img src="{{ asset('images/logo3.jpeg') }}" width="70" class="rounded-full mx-auto" />
+                </div>
+            </a>
 
             @if($user = auth()->user())
             <x-list-item :item="$user" value="nome" sub-value="nenhum" no-separator no-hover class="border-y border-y-base-300">
