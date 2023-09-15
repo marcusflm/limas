@@ -7,9 +7,9 @@ use App\Models\ItensCompra;
 use App\Models\Lote;
 use App\Models\Produto;
 use App\Models\Receita;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-use Ramsey\Uuid\Type\Decimal;
 
 class LoteCreate extends Component
 {
@@ -35,12 +35,11 @@ class LoteCreate extends Component
 
     public function search(string $value = '')
     {
-        $this->produtos = Produto::query()
+        $this->produtos = Produto::whereHas('receita')
             ->where('nome', 'like', "%{$value}%")
             ->take(5)
             ->get();
     }
-
 
     public function search2(string $value = '')
     {
@@ -75,7 +74,6 @@ class LoteCreate extends Component
         $receita = Receita::where('produto_id', $produto_id)->with('ingredientesReceita')->first();
         $ingredientes = $receita->ingredientesReceita;
         $itensCompra = ItensCompra::where('compra_id', $compra_id)->get();
-        // dd($itensCompra, $ingredientes)->toArray();
         foreach ($itensCompra as $item) {
             foreach ($ingredientes as $ingrediente) {
                 if ($ingrediente->ingrediente_id == $item->ingrediente_id) {

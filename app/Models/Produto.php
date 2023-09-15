@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Produto extends Model
 {
@@ -23,8 +24,8 @@ class Produto extends Model
         return $this->hasMany(ItensPedido::class);
     }
 
-    public function receita(): BelongsTo
+    public function receita(): HasOne
     {
-        return $this->belongsTo(Receita::class);
+        return $this->hasOne(Receita::class);
     }
 }
