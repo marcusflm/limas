@@ -42,15 +42,10 @@ class DatabaseSeeder extends Seeder
 
         StatusPagamento::insert([
             [
-                'nome' => 'Pendente',
-                'botao' => 'btn-outline btn-error',
-                'badge' => 'badge-error'
-
+                'nome' => 'Pendente'
             ],
             [
-                'nome' => 'Pago',
-                'botao' => 'bg-success text-white',
-                'badge' => 'badge-success'
+                'nome' => 'Pago'
             ]
         ]);
 

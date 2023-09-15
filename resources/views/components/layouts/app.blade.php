@@ -9,33 +9,28 @@
 </head>
 
 <body class="min-h-screen font-sans antialiased bg-base-200">
-    @auth
-    {{-- The navbar with `sticky` --}}
-    <x-nav sticky>
-        <x-slot:brand>
-            {{-- Drawer toggle for "main-drawer" --}}
-            <label for="main-drawer" class="lg:hidden mr-3">
-                <x-icon name="o-bars-3" class="cursor-pointer" />
-            </label>
+    <x-main>
+        @auth
+        <x-slot:sidebar class="bg-[#c58a25] text-white strong" drawer="main-drawer" collapsible collapse-text="Recolher">
+
+            <!-- Hidden when collapsed -->
             <a href="/">
-                <div class="flex content-center gap-2">
-                    <img src="{{ asset('images/logo3.jpeg') }}" width="70" class="rounded-full lg:absolute lg:ml-20" />
+                <div class="mx-3 my-5">
+                    <img src="{{ asset('images/logo3.jpeg') }}" width="70" class="rounded-full mx-auto" />
                 </div>
             </a>
-        </x-slot:brand>
-        <x-slot:actions>
-            <a href="/logout"><x-icon name="o-power" class="mr-2 pb-0.5" />Sair</a>
-        </x-slot:actions>
-    </x-nav>
-    @endauth
 
-    {{-- The main content --}}
-    <x-main>
-        {{-- It is a sidebar that works also as a drawer at small screens --}}
-        {{-- Note `main-drawer` reference here --}}
-        @auth
-        <x-slot:sidebar class="bg-[#c58a25] text-white strong" drawer="main-drawer">
-            <x-menu class="lg:mt-4">
+            @if($user = auth()->user())
+            <x-list-item :item="$user" value="nome" sub-value="nenhum" no-separator no-hover class="border-y border-y-base-300">
+                <x-slot:actions>
+                    <div class="tooltip tooltip-left" data-tip="logoff">
+                        <a href="/logout" class="btn btn-ghost btn-circle btn-sm"><x-icon name="o-power" /></a>
+                    </div>
+                </x-slot:actions>
+            </x-list-item>
+            @endif
+
+            <x-menu class="lg:mt-4" activate-by-route active-bg-color="bg-base-300/10">
                 <x-menu-item title="Pedidos" icon="o-plus-circle" link="/pedidos" class="text-base" />
                 <x-menu-item title="Produtos" icon="o-heart" link="/produtos" class="text-base" />
                 <x-menu-item title="Categorias" icon="o-cake" link="/categorias" class="text-base" />
@@ -50,18 +45,9 @@
         </x-slot:sidebar>
         @endauth
 
-        {{-- The `$slot` goes here --}}
         <x-slot:content>
             {{ $slot }}
         </x-slot:content>
-
-        {{-- Footer area --}}
-        <x-slot:footer>
-            <hr />
-            <div class="p-6">
-                Footer
-            </div>
-        </x-slot:footer>
     </x-main>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

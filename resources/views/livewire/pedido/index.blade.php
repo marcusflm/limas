@@ -26,7 +26,7 @@
             @scope('actions', $pedido)
             <div class="flex gap-3">
                 @if($pedido->isFechado() && $pedido->isPendente())
-                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm btn-outline btn-success" />
+                <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm btn-outline btn-success" title="Confirmar pagamento" />
                 @endif
                 @if($pedido->isAberto())
                 <x-button icon="o-trash" wire:click="delete({{ $pedido->id }})" class="btn-sm btn-outline btn-error" />

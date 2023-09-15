@@ -1,5 +1,9 @@
-FROM robsontenorio/laravel:2.3
-
+FROM robsontenorio/laravel:2.3 as base
 COPY --chown=appuser:appuser . .
 
-CMD ["/bin/sh", "-c", "/usr/local/bin/start"]
+FROM base as local
+CMD ["/usr/local/bin/start"] 
+
+FROM base as deploy
+RUN chmod a+x .docker/deploy.sh
+CMD ["/bin/sh", "-c", ".docker/deploy.sh && /usr/local/bin/start"]

@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('status_pagamentos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome', 50);
-            $table->string('botao', 100);
-            $table->string('badge', 100);
             $table->timestamps();
         });
     }

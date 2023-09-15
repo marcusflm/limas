@@ -6,6 +6,7 @@ services:
         build:
             context: ..
             dockerfile: .docker/Dockerfile
+            target: local
         command: "/usr/local/bin/start"
         environment:
             - CONTAINER_ROLE=APP
@@ -15,18 +16,17 @@ services:
             - 8017:8080
             - 8000:8000
 
-    ######## MYSQL ########
-    limas-mysql:
-        image: mysql/mysql-server:8.0.32
+    ######## POSTGRES ########
+    limas-postgres:
+        image: postgres:14.3
         environment:
-            - MYSQL_DATABASE=limasdb
-            - MYSQL_USER=limas
-            - MYSQL_PASSWORD=password
-            - MYSQL_ROOT_PASSWORD=password
+            - POSTGRES_DB=limasdb
+            - POSTGRES_USER=limas
+            - POSTGRES_PASSWORD=limas
         volumes:
-            - ~/.docker-storage/limas/mysql:/var/lib/mysql
+            - ~/.docker-storage/limas/postgres:/var/lib/postgresql/data
         ports:
-            - 3317:3306
+            - 5418:5432
 
     ######## REDIS ########
     limas-redis:
