@@ -36,7 +36,6 @@
                 <x-menu-item title="Categorias" icon="o-cake" link="/categorias" />
                 <x-menu-item title="Clientes" icon="o-users" link="/clientes" />
                 <x-menu-item title="Bairros" icon="o-home" link="/bairros" />
-                <x-menu-item title="Lotes" icon="o-tag" link="###" />
             </x-menu>
         </x-slot:sidebar>
         @endauth
