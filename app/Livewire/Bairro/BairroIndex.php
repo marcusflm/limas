@@ -23,6 +23,7 @@ class BairroIndex extends Component
     function fechaModal(): void
     {
         $this->myModal = false;
+        $this->reset('bairro');
     }
 
     public function edit(Bairro $bairro)
@@ -33,7 +34,7 @@ class BairroIndex extends Component
 
     public function create()
     {
-        unset($this->bairro);
+        $this->reset('bairro');
         $this->myModal = true;
     }
 
