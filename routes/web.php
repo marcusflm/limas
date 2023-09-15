@@ -18,6 +18,7 @@ use App\Livewire\Pedido\PedidoItemCreate;
 use App\Livewire\Pedido\PedidoShow;
 use App\Livewire\Produto\ProdutoIndex;
 use App\Livewire\Produto\ProdutoShow;
+use App\Livewire\Receita\ReceitaIndex;
 use App\Livewire\Receita\ReceitaShow;
 
 Route::get('/login', Login::class)->name('login');
