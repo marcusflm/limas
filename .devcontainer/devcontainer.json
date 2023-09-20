@@ -1,19 +1,29 @@
 {
-    "name": "limas",
-    "service": "limas",
-    "workspaceFolder": "/var/www/app",
-    "dockerComposeFile": "../.docker/docker-compose.yml",
-    "remoteUser": "appuser",
-    "customizations": {
+	"name": "limas",
+	"service": "limas",
+	"workspaceFolder": "/var/www/app",
+	"dockerComposeFile": "../.docker/docker-compose.yml",
+	"remoteUser": "appuser",
+	"customizations": {
 		"vscode": {
 			"settings": {
-				"terminal.integrated.defaultProfile.linux": "zsh"
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"editor.formatOnSave": true,
+				"laravel-pint.enable": true,
+				"[php]": {
+					"editor.defaultFormatter": "open-southeners.laravel-pint"
+				},
+				"[blade]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				}
 			},
 			"extensions": [
 				"bmewburn.vscode-intelephense-client",
-				"PKief.material-icon-theme",
-				"bradlc.vscode-tailwindcss"
+				"open-southeners.laravel-pint",
+				"esbenp.prettier-vscode",
+				"bradlc.vscode-tailwindcss",
+				"Porifa.laravel-intelephense",
+				"amirmarmul.laravel-blade-vscode"
 			]
 		}
 	}
-}
