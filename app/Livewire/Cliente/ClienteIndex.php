@@ -10,15 +10,15 @@ use Livewire\Component;
 
 class ClienteIndex extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     public string $termo = '';
 
     public bool $myModal = false;
 
     #[On('cliente-edicao-concluida')]
-    function fechaModal(): void
+    public function fechaModal(): void
     {
         $this->myModal = false;
     }
@@ -33,6 +33,7 @@ class ClienteIndex extends Component
     {
         if ($cliente->pedidos()->count()) {
             $this->alert('error', 'Cliente possui pedidos!');
+
             return;
         }
 
@@ -42,16 +43,16 @@ class ClienteIndex extends Component
 
     public function formataTelefone($fone)
     {
-        if (!$fone) {
+        if (! $fone) {
             return '';
         }
 
         if (strlen($fone) == 10) {
-            return '(' . substr($fone, 0, 2) . ') ' . substr($fone, 2, 4) . '-' . substr($fone, 6);
+            return '('.substr($fone, 0, 2).') '.substr($fone, 2, 4).'-'.substr($fone, 6);
         }
 
         if (strlen($fone) == 11) {
-            return '(' . substr($fone, 0, 2) . ') ' . substr($fone, 2, 1) . ' ' . substr($fone, 3, 4) . '-' . substr($fone, 7);
+            return '('.substr($fone, 0, 2).') '.substr($fone, 2, 1).' '.substr($fone, 3, 4).'-'.substr($fone, 7);
         }
 
         return $fone;
@@ -74,7 +75,7 @@ class ClienteIndex extends Component
 
         return view('livewire.cliente.index', [
             'clientes' => $clientes,
-            'headers' => $headers
+            'headers' => $headers,
         ]);
     }
 }

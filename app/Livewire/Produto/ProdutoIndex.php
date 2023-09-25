@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class ProdutoIndex extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     public Produto $produto;
 
@@ -20,7 +20,7 @@ class ProdutoIndex extends Component
     public bool $myModal = false;
 
     #[On('produto-edicao-concluida')]
-    function fechaModal(): void
+    public function fechaModal(): void
     {
         $this->myModal = false;
     }
@@ -35,6 +35,7 @@ class ProdutoIndex extends Component
     {
         if ($produto->itens()->count()) {
             $this->alert('error', 'Produto está sendo usado!');
+
             return;
         }
 
@@ -49,10 +50,13 @@ class ProdutoIndex extends Component
             ['key' => 'nome', 'label' => 'Nome'],
             ['key' => 'categoria.nome', 'label' => 'Categoria'],
             ['key' => 'valor', 'label' => 'Valor'],
-            ['key' => 'descricao', 'label' => 'Descrição']
+            ['key' => 'descricao', 'label' => 'Descrição'],
         ];
 
-        $produtos = Produto::with('categoria')->where('nome', 'like', "%{$this->termo}%")->get();
+        $produtos = Produto::with('categoria')
+            ->where('nome', 'like', "%{$this->termo}%")
+            ->orderBy('id', 'asc')
+            ->get();
 
         return view('livewire.produto.index', ['produtos' => $produtos, 'headers' => $headers]);
     }
