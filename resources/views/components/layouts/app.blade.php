@@ -8,8 +8,16 @@
     </head>
 
     <body class="min-h-screen bg-base-200 font-sans antialiased">
-        <x-main>
-            @auth
+        @auth
+            <x-nav sticky full-width class="md:hidden lg:hidden">
+                <x-slot:brand>
+                    <!-- Drawer toggle for "main-drawer" -->
+                    <label for="main-drawer" class="mr-3 lg:hidden">
+                        <x-icon name="o-bars-3" class="cursor-pointer" />
+                    </label>
+                </x-slot>
+            </x-nav>
+            <x-main>
                 <x-slot:sidebar class="strong bg-[#c58a25] text-white" drawer="main-drawer" collapsible collapse-text="Recolher">
                     <!-- Hidden when collapsed -->
                     <a href="/">
@@ -37,12 +45,12 @@
                         <x-menu-item title="Usuários" icon="o-face-smile" link="/usuarios" />
                     </x-menu>
                 </x-slot>
-            @endauth
 
-            <x-slot:content>
-                {{ $slot }}
-            </x-slot>
-        </x-main>
+                <x-slot:content>
+                    {{ $slot }}
+                </x-slot>
+            </x-main>
+        @endauth
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <x-livewire-alert::scripts />
