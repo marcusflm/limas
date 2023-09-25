@@ -11,16 +11,14 @@ use Livewire\Component;
 
 class ClienteCreate extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     #[Rule('required')]
     public $nome;
 
-    #[Rule('required|min:10')]
     public $telefone;
 
-    #[Rule('required|email')]
     public $email;
 
     #[Rule('required')]
@@ -43,7 +41,7 @@ class ClienteCreate extends Component
 
     public function save()
     {
-        $this->telefone = preg_replace("/[^0-9]/", "", $this->telefone);
+        $this->telefone = preg_replace('/[^0-9]/', '', $this->telefone);
 
         if (strlen($this->telefone) > 11) {
             $this->telefone = substr($this->telefone, 0, 11);
