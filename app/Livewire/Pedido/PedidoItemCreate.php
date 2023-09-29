@@ -13,8 +13,8 @@ use Livewire\Component;
 
 class PedidoItemCreate extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     public Pedido $pedido;
 
@@ -61,6 +61,7 @@ class PedidoItemCreate extends Component
 
         if ($produtoJaAdicionado) {
             $this->alert('error', 'Item já existe no pedido!');
+
             return;
         }
 
@@ -76,11 +77,11 @@ class PedidoItemCreate extends Component
                 'produto_id' => $this->produto_id,
                 'valor_unitario' => $valor_unitario,
                 'quantidade' => $this->quantidade,
-                'valor_total' =>  $valor_total
+                'valor_total' => $valor_total,
             ]);
 
             $this->pedido->valor_itens = $this->pedido->valor_itens + $valor_total;
-            $this->pedido->valor_total = $this->pedido->valor_total + $this->pedido->valor_frete + $valor_total;
+            $this->pedido->valor_total = $this->pedido->valor_itens + $this->pedido->valor_frete;
             $this->pedido->save();
 
             DB::commit();

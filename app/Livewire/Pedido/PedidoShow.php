@@ -13,8 +13,8 @@ use Livewire\Component;
 
 class PedidoShow extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     public Pedido $pedido;
 
@@ -37,11 +37,10 @@ class PedidoShow extends Component
     public bool $myModal = false;
 
     #[On('pedido-edicao-concluida')]
-    function fechaModal(): void
+    public function fechaModal(): void
     {
         $this->myModal = false;
     }
-
 
     public function mount()
     {
@@ -65,6 +64,13 @@ class PedidoShow extends Component
             $this->alert('success', 'Pedido fechado com sucesso!');
             $this->navegar('/pedidos');
         }
+    }
+
+    public function grava_observacao()
+    {
+        $this->pedido->observacao = $this->observacao;
+        $this->pedido->save();
+        $this->alert('success', 'Observação salva!');
     }
 
     public function render()
