@@ -11,8 +11,8 @@ use Livewire\Component;
 
 class ClienteEdit extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     public Cliente $cliente;
 
@@ -21,16 +21,14 @@ class ClienteEdit extends Component
     #[Rule('required')]
     public $nome;
 
-    #[Rule('required|min:10')]
     public $telefone;
 
-    #[Rule('required|email')]
     public $email;
 
     #[Rule('required')]
     public $bairro_id;
 
-    function boot()
+    public function boot()
     {
         $this->nome = $this->cliente->nome;
         $this->telefone = $this->cliente->telefone;
@@ -49,7 +47,7 @@ class ClienteEdit extends Component
 
     public function save()
     {
-        $this->telefone = preg_replace("/[^0-9]/", "", $this->telefone);
+        $this->telefone = preg_replace('/[^0-9]/', '', $this->telefone);
 
         if (strlen($this->telefone) > 11) {
             $this->telefone = substr($this->telefone, 0, 11);

@@ -12,6 +12,7 @@ use Livewire\Component;
 class ClienteShow extends Component
 {
     use Navegavel;
+
     public Cliente $cliente;
 
     public $pedidos;
@@ -19,10 +20,8 @@ class ClienteShow extends Component
     #[Rule('required')]
     public $nome;
 
-    #[Rule('required|min:10')]
     public $telefone;
 
-    #[Rule('required|email')]
     public $email;
 
     #[Rule('required')]
@@ -31,12 +30,12 @@ class ClienteShow extends Component
     public bool $myModal = false;
 
     #[On('cliente-edicao-concluida')]
-    function fechaModal(): void
+    public function fechaModal(): void
     {
         $this->myModal = false;
     }
 
-    function mount()
+    public function mount()
     {
         $this->nome = $this->cliente->nome;
         $this->telefone = $this->cliente->telefone;
@@ -51,13 +50,13 @@ class ClienteShow extends Component
             ['key' => 'data_pedido', 'label' => 'Data pedido'],
             ['key' => 'status_pagamento.nome', 'label' => 'Status pagamento'],
             ['key' => 'status_pedido.nome', 'label' => 'Status pedido'],
-            ['key' => 'valor_total', 'label' => 'Total']
+            ['key' => 'valor_total', 'label' => 'Total'],
         ];
 
         return view(
             'livewire.cliente.show',
             [
-                'headers' => $headers
+                'headers' => $headers,
             ]
         );
     }
