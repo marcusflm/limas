@@ -5,6 +5,7 @@ namespace App\Livewire\Pedido;
 use App\Models\ItensPedido;
 use App\Models\Pedido;
 use App\Models\Produto;
+use App\Models\StatusPedido;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
@@ -28,15 +29,17 @@ class PedidoItemList extends Component
     public bool $myModal = false;
 
     #[On('pedido-edicao-concluida')]
-    function fechaModal(): void
+    public function fechaModal(): void
     {
         $this->myModal = false;
     }
 
     public function edit(ItensPedido $item)
     {
-        $this->item = $item;
-        $this->myModal = true;
+        if ($this->pedido->status_pedido_id == StatusPedido::ABERTO) {
+            $this->item = $item;
+            $this->myModal = true;
+        }
     }
 
     public function delete(ItensPedido $item)
@@ -56,6 +59,7 @@ class PedidoItemList extends Component
             $this->pedido->save();
 
             DB::commit();
+
             return redirect()->to("/pedidos/{$this->pedido->id}");
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -68,17 +72,17 @@ class PedidoItemList extends Component
         $itensPedido = ItensPedido::with('produto')->where('pedido_id', $this->pedido->id)->get();
 
         $headers = [
-            ['key' => 'id', 'label' => '#'],
+            ['key' => 'produto.id', 'label' => 'Código'],
             ['key' => 'produto.nome', 'label' => 'Produto'],
             ['key' => 'quantidade', 'label' => 'Quantidade'],
             ['key' => 'valor_unitario', 'label' => 'Valor unitário'],
-            ['key' => 'valor_total', 'label' => 'Valor total']
+            ['key' => 'valor_total', 'label' => 'Valor total'],
         ];
 
         return view('livewire.pedido.pedido-item-list', [
             'headers' => $headers,
             'itensPedido' => $itensPedido,
-            'produtos' => Produto::all()
+            'produtos' => Produto::all(),
         ]);
     }
 }
