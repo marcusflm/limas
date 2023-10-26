@@ -61,8 +61,17 @@ class PedidoShow extends Component
             $this->pedido->valor_total = $this->valor_itens + $this->valor_frete - $this->valor_desconto;
             $this->pedido->observacao = $this->observacao;
             $this->pedido->save();
-            $this->alert('success', 'Pedido fechado com sucesso!');
-            $this->navegar('/pedidos');
+            $this->navegar('/pedidos/'.$this->pedido->id);
+
+            return;
+        }
+
+        if ($this->pedido->isFechado()) {
+            $this->pedido->status_pedido_id = StatusPedido::ABERTO;
+            $this->pedido->save();
+            $this->navegar('/pedidos/'.$this->pedido->id);
+
+            return;
         }
     }
 

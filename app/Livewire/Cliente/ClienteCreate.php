@@ -17,8 +17,10 @@ class ClienteCreate extends Component
     #[Rule('required')]
     public $nome;
 
+    #[Rule('max:15')]
     public $telefone;
 
+    #[Rule('email')]
     public $email;
 
     #[Rule('required')]
@@ -47,7 +49,10 @@ class ClienteCreate extends Component
             $this->telefone = substr($this->telefone, 0, 11);
         }
 
-        Cliente::create($this->validate());
+        $cliente = Cliente::create($this->validate());
+        $cliente->telefone = $this->telefone;
+        $cliente->email = $this->email;
+        $cliente->save();
         $this->alert('success', 'Cliente criado com sucesso!');
         $this->dispatch('cliente-edicao-concluida');
     }

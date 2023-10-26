@@ -11,25 +11,25 @@ use Livewire\Component;
 
 class PedidoIndex extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     public $termo = '';
 
     public bool $myModal = false;
 
     #[On('pedido-edicao-concluida')]
-    function fechaModal(): void
+    public function fechaModal(): void
     {
         $this->myModal = false;
     }
 
     public function delete(Pedido $pedido)
     {
-        if ($pedido->isFechado()) {
-            $this->alert('error', 'Pedido está fechado!');
-            return;
-        }
+        // if ($pedido->isFechado()) {
+        //     $this->alert('error', 'Pedido está fechado!');
+        //     return;
+        // }
 
         $pedido->delete();
         $this->alert('success', 'Pedido apagado!');
@@ -41,6 +41,16 @@ class PedidoIndex extends Component
             $pedido->status_pagamento_id = StatusPagamento::PAGO;
             $pedido->save();
             $this->navegar('/pedidos');
+
+            return;
+        }
+
+        if ($pedido->isPago()) {
+            $pedido->status_pagamento_id = StatusPagamento::PENDENTE;
+            $pedido->save();
+            $this->navegar('/pedidos');
+
+            return;
         }
     }
 
@@ -52,13 +62,17 @@ class PedidoIndex extends Component
             ['key' => 'data_pedido', 'label' => 'Data pedido'],
             ['key' => 'status_pagamento.nome', 'label' => 'Status pagamento'],
             ['key' => 'status_pedido.nome', 'label' => 'Status pedido'],
-            ['key' => 'valor_total', 'label' => 'Total']
+            ['key' => 'valor_total', 'label' => 'Total'],
         ];
 
-        $pedidos = Pedido::with('cliente')->with('status_pagamento')->with('status_pedido')->get();
-        // dd($this);
-        // $pedidos = $pedidos->where("{$pedidos->cliente->nome}", 'like', "%{$this->termo}%");
+        $pedidos = Pedido::with(['status_pagamento', 'status_pedido'])
+            ->withWhereHas(
+                'cliente', function ($query) {
+                    $query->where('nome', 'like', "%{$this->termo}%");
+                }
+            )
+            ->get();
 
-        return view('livewire.pedido.index', ['pedidos' =>  $pedidos, 'headers' => $headers]);
+        return view('livewire.pedido.index', ['pedidos' => $pedidos, 'headers' => $headers]);
     }
 }

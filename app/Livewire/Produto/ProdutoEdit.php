@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class ProdutoEdit extends Component
 {
-    use Navegavel;
     use LivewireAlert;
+    use Navegavel;
 
     public Produto $produto;
 
@@ -26,7 +26,7 @@ class ProdutoEdit extends Component
 
     public $descricao;
 
-    function mount()
+    public function mount()
     {
         $this->nome = $this->produto->nome;
         $this->categoria_id = $this->produto->categoria_id;
@@ -37,8 +37,11 @@ class ProdutoEdit extends Component
     public function save()
     {
         $this->produto->fresh()->update($this->validate());
-        $this->alert('success', 'Produto alterado com sucesso!');
+        $this->produto->descricao = $this->descricao;
+        $this->produto->update();
         $this->dispatch('produto-edicao-concluida');
+        $this->flash('success', 'Produto alterado!', [], '/produtos/'.$this->produto->id);
+        // $this->navegar('/produtos/'.$this->produto->id);
     }
 
     public function render()

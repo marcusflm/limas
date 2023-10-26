@@ -46,13 +46,18 @@
                         <x-menu-item title="Clientes" icon="o-users" link="/clientes" />
                         <x-menu-item title="Bairros" icon="o-home" link="/bairros" />
                         <x-menu-item title="Usuários" icon="o-face-smile" link="/usuarios" />
+                        
+                        
                     </x-menu>
                 </x-slot>
+                
+               
             @endauth
 
             <x-slot:content>
                 {{ $slot }}
             </x-slot>
+        <h1>Versão 1.0</h1>
         </x-main>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

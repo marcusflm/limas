@@ -14,7 +14,7 @@
             <div class="w-1/2 lg:w-2/5">
                 <x-input label="Valor" wire:model="valor" prefix="R$" thousands-separator="." fraction-separator="," money readonly />
             </div><br>
-            <x-input label="Descrição" wire:model="descricao" readonly />
+            <x-input label="Descrição" :value="$descricao" readonly />
         </x-card>
     </div>
     <br>

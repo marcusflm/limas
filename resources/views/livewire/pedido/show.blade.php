@@ -1,7 +1,8 @@
 <div>
     <x-header title="Pedido {{$pedido->id}}" subtitle="Cliente: {{$pedido->cliente->nome}}" separator>
         <x-slot:actions>
-            @if ($pedido->itensPedido()->count() > 0 && $pedido->isAberto())
+            {{-- @if ($pedido->itensPedido()->count() > 0 && $pedido->isAberto()) --}}
+            @if ($pedido->itensPedido()->count() > 0)
                 <x-button
                     wire:click="alterar_status_pedido"
                     label="{{ $pedido->isAberto() ? 'Fechar pedido' : 'Pedido fechado' }}"
@@ -10,9 +11,9 @@
                 />
             @endif
 
-            @if ($pedido->isAberto())
+            {{-- @if ($pedido->isAberto()) --}}
                 <x-button icon="o-plus" class="btn-primary" @click="$wire.myModal = true" />
-            @endif
+            {{-- @endif --}}
         </x-slot>
     </x-header>
 
@@ -47,7 +48,14 @@
         <br />
         <div>
             <x-card>
-                <x-input label="Observação" wire:model="observacao" wire:keydown.enter="grava_observacao" />
+                <x-textarea
+                    wire:model="observacao"
+                    placeholder="Observação"
+                    hint="Shift+Enter ou Tab para salvar..."
+                    wire:keydown.shift.enter="grava_observacao"
+                    wire:keydown.tab="grava_observacao"
+                    rows="3"
+                    inline />
             </x-card>
         </div>
     @else

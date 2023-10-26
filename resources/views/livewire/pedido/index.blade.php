@@ -1,6 +1,8 @@
 <div>
     <x-header title="Pedidos" separator>
         <x-slot:actions>
+            <x-input placeholder="Pesquisar..." wire:model.live="termo" icon="o-magnifying-glass" />
+            {{-- <x-button icon="o-funnel" class="btn-primary"/> --}}
             <x-button icon="o-plus" class="btn-primary" @click="$wire.myModal = true" />
         </x-slot:actions>
     </x-header>
@@ -25,19 +27,19 @@
 
             @scope('actions', $pedido)
             <div class="flex gap-3">
-                @if($pedido->isFechado() && $pedido->isPendente())
+                {{-- @if($pedido->isFechado() && $pedido->isPendente()) --}}
                 <x-button icon="o-currency-dollar" wire:click="altera_status_pagamento({{ $pedido->id }})" class="btn btn-sm btn-outline btn-success" title="Confirmar pagamento" />
-                @endif
-                @if($pedido->isAberto())
+                {{-- @endif --}}
+                {{-- @if($pedido->isAberto()) --}}
                 <x-button icon="o-trash" wire:click="delete({{ $pedido->id }})" class="btn-sm btn-outline btn-error" />
-                @endif
+                {{-- @endif --}}
             </div>
             @endscope
         </x-table>
     </x-card>
     @else
     <x-card>
-        <x-alert icon="o-user" title="Não foram encontrados pedidos" />
+        <x-alert icon="o-user" title="Nenhum pedido para exibir." />
     </x-card>
     @endif
 </div>

@@ -21,8 +21,10 @@ class ClienteEdit extends Component
     #[Rule('required')]
     public $nome;
 
+    #[Rule('max:15')]
     public $telefone;
 
+    #[Rule('email')]
     public $email;
 
     #[Rule('required')]
@@ -54,8 +56,8 @@ class ClienteEdit extends Component
         }
 
         $this->cliente->fresh()->update($this->validate());
-        $this->alert('success', 'Cliente alterado com sucesso!');
         $this->dispatch('cliente-edicao-concluida');
+        $this->flash('success', 'Cliente alterado!', [], '/clientes/'.$this->cliente->id);
     }
 
     public function render()
